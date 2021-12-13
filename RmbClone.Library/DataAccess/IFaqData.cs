@@ -6,7 +6,7 @@ namespace RmbClone.Library.DataAccess
 {
     public interface IFaqData
     {
-        Task AddFaq(FaqRequestModel model);
+        Task AddFaq(FaqDBModel model);
         Task<List<FaqDBModel>> getAllFaq();
     }
 }

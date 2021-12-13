@@ -23,14 +23,9 @@ namespace RmbClone.Library.DataAccess
             return result;
         }
 
-
-        public async Task AddFaq(FaqRequestModel model)
+        public async Task AddFaq(FaqDBModel model)
         {
-            var faqModel = new FaqDBModel();
-            faqModel.Id = Guid.NewGuid().ToString();
-            faqModel.Answer = model.Answer;
-            faqModel.Question = model.Question;
-            await _sql.SaveData("dbo.spFaq_Insert", faqModel, "RmbCloneDb");
+            await _sql.SaveData("dbo.spFaq_Insert", model, "RmbCloneDb");
         }
     }
 }

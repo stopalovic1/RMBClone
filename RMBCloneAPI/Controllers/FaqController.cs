@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models;
+using RmbCloneAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,8 @@ namespace RMBCloneAPI.Controllers
         [HttpPost]
         public async Task AddFaq(FaqRequestModel model)
         {
-            await _faqData.AddFaq(model);
+            var faq = new FaqDBModel { Question = model.Question, Answer = model.Answer };
+            await _faqData.AddFaq(faq);
         }
 
     }

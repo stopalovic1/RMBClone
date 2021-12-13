@@ -63,7 +63,7 @@ namespace RMBCloneAPI
             app.UseSwaggerUI(x =>
             {
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-                //x.RoutePrefix = "";
+                //x.RoutePrefix = String.Empty;
             });
 
             app.UseEndpoints(endpoints =>
