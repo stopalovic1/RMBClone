@@ -11,7 +11,9 @@ using RmbClone.Library.DataAccess;
 using RmbClone.Library.Internal.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace RMBCloneAPI
@@ -32,6 +34,7 @@ namespace RMBCloneAPI
 
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IFaqData, FaqData>();
+            services.AddTransient<IUserData, UserData>();
 
             services.AddSwaggerGen(setup =>
             {
@@ -42,6 +45,9 @@ namespace RMBCloneAPI
                         Title = "RmbClone API",
                         Version = "v1"
                     });
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
 

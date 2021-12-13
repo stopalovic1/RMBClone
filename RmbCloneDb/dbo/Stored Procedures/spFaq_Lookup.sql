@@ -2,5 +2,5 @@
 AS
 begin
 	set nocount on;
-	select * from [dbo].[FrequentlyAskedQuestions]
+	select * from [dbo].[FrequentlyAskedQuestions];
 end
