@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Internal.DataAccess;
 using System;
@@ -31,6 +32,17 @@ namespace RMBCloneAPI
 
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IFaqData, FaqData>();
+
+            services.AddSwaggerGen(setup =>
+            {
+                setup.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "RmbClone API",
+                        Version = "v1"
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +58,13 @@ namespace RMBCloneAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                //x.RoutePrefix = "";
+            });
 
             app.UseEndpoints(endpoints =>
             {
