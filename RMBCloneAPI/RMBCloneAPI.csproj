@@ -8,5 +8,9 @@
     <ProjectReference Include="..\RmbClone.Library\RmbClone.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 
 </Project>

@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RmbClone.Library.DataAccess;
+using RmbClone.Library.Internal.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,9 @@ namespace RMBCloneAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IFaqData, FaqData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

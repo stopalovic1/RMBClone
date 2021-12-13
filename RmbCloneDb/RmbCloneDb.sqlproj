@@ -65,6 +65,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\FrequentlyAskedQuestions.sql" />
     <Build Include="dbo\Stored Procedures\spFaq_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spFaq_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

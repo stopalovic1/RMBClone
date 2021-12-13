@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace RmbClone.Library.Internal.DataAccess
 {
-    public class SqlDataAccess
+    public class SqlDataAccess : ISqlDataAccess
     {
         private readonly IConfiguration _config;
 
@@ -26,7 +26,7 @@ namespace RmbClone.Library.Internal.DataAccess
 
         }
 
-        public async Task<List<T>> LoadData<T,U>(string storedProcedure,U parameters,string connectionStringName)
+        public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
 
             string connectionString = GetConnectionString(connectionStringName);
@@ -42,7 +42,7 @@ namespace RmbClone.Library.Internal.DataAccess
             string connectionString = GetConnectionString(connectionStringName);
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                 await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
