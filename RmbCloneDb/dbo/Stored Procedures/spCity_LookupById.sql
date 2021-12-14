@@ -1,9 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[spCity_LookupById]
-	@id nvarchar(128)
-
+	@Id nvarchar(128)
 AS
 begin
 	set nocount on;
-	select * from [dbo].[Location]
+	select * from [dbo].[City]
 	where Id = @Id;
 end

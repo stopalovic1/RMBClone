@@ -21,15 +21,20 @@ namespace RMBCloneAPI.Controllers
             _locationData = locationData;
         }
 
-
+        /// <response code="200">Vraća sve lokacije.</response> 
         [HttpGet]
+        [ProducesResponseType(200)]
         public async Task<List<LocationDBModel>> GetAll()
         {
             var result = await _locationData.GetAllLocationsAsync();
             return result;
         }
 
+        /// <response code="200">Lokacija uspješno dodan.</response> 
+        /// <response code="400">Body je neispravan.</response>
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> AddLocation(LocationRequestModel model)
         {
             if (ModelState.IsValid)
@@ -47,7 +52,11 @@ namespace RMBCloneAPI.Controllers
             return BadRequest();
         }
 
+        /// <response code="204">Lokacija uspješno obrisana.</response> 
+        /// <response code="400">Lokacija sa zadanim id-om ne postoji.</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteLocation(string id)
         {
             var location = await _locationData.FindAsync(id);
@@ -56,7 +65,7 @@ namespace RMBCloneAPI.Controllers
                 return BadRequest();
             }
             await _locationData.DeleteLocationAsync(location.Id);
-            return Ok();
+            return NoContent();
         }
     }
 }

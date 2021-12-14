@@ -26,6 +26,8 @@ namespace RMBCloneAPI.Controllers
         /// <response code="200">Korisnik kreiran.</response> 
         /// <response code="400">Ili korsnik sa unesenim emailom već postoji ili se passwordi ne podudraju.</response> 
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> AddUser(UserRegisterRequestModel model)
         {
             if (ModelState.IsValid)
@@ -50,7 +52,9 @@ namespace RMBCloneAPI.Controllers
             return BadRequest();
         }
 
+        /// <response code="200">Vraća listu korisnika.</response> 
         [HttpGet]
+        [ProducesResponseType(200)]
         public async Task<List<UserDBModel>> GetUsers()
         {
             var result = await _userData.GetAllUsersAsync();

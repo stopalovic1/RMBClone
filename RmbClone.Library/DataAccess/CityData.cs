@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RmbClone.Library.DataAccess
 {
-    public class CityData
+    public class CityData : ICityData
     {
         private readonly ISqlDataAccess _sql;
 
@@ -25,7 +25,7 @@ namespace RmbClone.Library.DataAccess
 
         public async Task AddCityAsync(CityDBModel model)
         {
-            await _sql.SaveDataAsync("dbo.spCity_Insert",model, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spCity_Insert", model, "RmbCloneDb");
         }
 
         public async Task<CityDBModel> FindAsync(string id)

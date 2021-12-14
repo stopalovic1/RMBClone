@@ -36,10 +36,10 @@ namespace RMBCloneAPI
             services.AddTransient<IFaqData, FaqData>();
             services.AddTransient<IUserData, UserData>();
             services.AddTransient<ILocationData, LocationData>();
-
+            services.AddTransient<ICityData, CityData>();
             services.Configure<ApiBehaviorOptions>(options =>
             {
-                //options.SuppressMapClientErrors = true;
+                options.SuppressMapClientErrors = true;
             });
 
             services.AddSwaggerGen(setup =>
