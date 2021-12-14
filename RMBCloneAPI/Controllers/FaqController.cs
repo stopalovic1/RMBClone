@@ -35,5 +35,38 @@ namespace RMBCloneAPI.Controllers
             await _faqData.AddFaq(faq);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateFaq(string id, FaqDBModel model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+
+            var faq = await _faqData.FindAsync(id);
+            if (faq == null)
+            {
+                return BadRequest();
+            }
+
+            faq.Question = model.Question;
+            faq.Answer = model.Answer;
+
+            await _faqData.UpdateFaq(faq);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFaq(string id)
+        {
+            var faq = await _faqData.FindAsync(id);
+            if (faq == null)
+            {
+                return BadRequest();
+            }
+            await _faqData.DeleteFaq(faq.Id);
+            return NoContent();
+        }
     }
 }

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[BranchType]
+(
+	[Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(50) NOT NULL, 
+    [IconPath] NVARCHAR(30) NOT NULL
+)

@@ -21,6 +21,8 @@ namespace RMBCloneAPI.Controllers
         {
             _userData = userData;
         }
+
+
         /// <response code="200">Korisnik kreiran.</response> 
         /// <response code="400">Ili korsnik sa unesenim emailom već postoji ili se passwordi ne podudraju.</response> 
         [HttpPost]
