@@ -80,6 +80,8 @@
     <Build Include="dbo\Stored Procedures\spFaq_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spLocation_Lookup.sql" />
     <Build Include="dbo\Stored Procedures\spLocation_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_LookupById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

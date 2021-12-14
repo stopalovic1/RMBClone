@@ -2,6 +2,7 @@
 using RmbClone.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,16 @@ namespace RmbClone.Library.DataAccess
             await _sql.SaveDataAsync("dbo.spLocation_Insert", model, "RmbCloneDb");
         }
 
+        public async Task DeleteLocationAsync(string id)
+        {
+            await _sql.SaveDataAsync("dbo.spLocation_Delete", new { Id = id }, "RmbCloneDb");
+        }
+
+        public async Task<LocationDBModel> FindAsync(string id)
+        {
+            var result = await _sql.LoadDataAsync<LocationDBModel, dynamic>("dbo.spLocation_LookupById", new { Id = id }, "RmbCloneDb");
+            return result.FirstOrDefault();
+        }
 
     }
 }

@@ -7,6 +7,8 @@ namespace RmbClone.Library.DataAccess
     public interface ILocationData
     {
         Task AddLocationAsync(LocationDBModel model);
+        Task DeleteLocationAsync(string id);
+        Task<LocationDBModel> FindAsync(string id);
         Task<List<LocationDBModel>> GetAllLocationsAsync();
     }
 }
