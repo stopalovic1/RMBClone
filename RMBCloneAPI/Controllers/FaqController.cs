@@ -3,15 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models;
 using RmbCloneAPI.Models;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Net;
 namespace RMBCloneAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FaqController : ControllerBase
     {
         private readonly IFaqData _faqData;
@@ -21,13 +23,15 @@ namespace RMBCloneAPI.Controllers
             _faqData = faqData;
         }
 
+        /// <response code="200">Vraca listu faq.</response> 
         [HttpGet]
         public async Task<List<FaqDBModel>> GetAll()
         {
-            var result = await _faqData.getAllFaq();
+            var result = await _faqData.GetAllFaq();
             return result;
         }
 
+        /// <response code="200">Faq kreiran.</response> 
         [HttpPost]
         public async Task AddFaq(FaqRequestModel model)
         {
@@ -35,28 +39,38 @@ namespace RMBCloneAPI.Controllers
             await _faqData.AddFaq(faq);
         }
 
+        /// <response code="204">Faq uspješno updateovan.</response> 
+        /// <response code="400">Ili faq sa unesenim Idom ne postoji ili se id iz bodija i id iz querija ne podudraju.</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> UpdateFaq(string id, FaqDBModel model)
         {
-            if (id != model.Id)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                if (id != model.Id)
+                {
+                    return BadRequest();
+                }
+
+                var faq = await _faqData.FindAsync(id);
+                if (faq == null)
+                {
+                    return BadRequest();
+                }
+
+                faq.Question = model.Question;
+                faq.Answer = model.Answer;
+
+                await _faqData.UpdateFaq(faq);
+
+                return NoContent();
             }
-
-            var faq = await _faqData.FindAsync(id);
-            if (faq == null)
-            {
-                return BadRequest();
-            }
-
-            faq.Question = model.Question;
-            faq.Answer = model.Answer;
-
-            await _faqData.UpdateFaq(faq);
-
-            return NoContent();
+            return BadRequest();
         }
 
+
+        /// <response code="204">Faq uspješno obrisan.</response> 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFaq(string id)
         {

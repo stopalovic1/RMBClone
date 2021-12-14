@@ -35,7 +35,10 @@ namespace RMBCloneAPI
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IFaqData, FaqData>();
             services.AddTransient<IUserData, UserData>();
-
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressMapClientErrors = true;
+            });
             services.AddSwaggerGen(setup =>
             {
                 setup.SwaggerDoc(
@@ -45,6 +48,8 @@ namespace RMBCloneAPI
                         Title = "RmbClone API",
                         Version = "v1"
                     });
+
+
 
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));

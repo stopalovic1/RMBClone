@@ -17,7 +17,7 @@ namespace RmbClone.Library.DataAccess
             _sql = sql;
         }
 
-        public async Task<List<FaqDBModel>> getAllFaq()
+        public async Task<List<FaqDBModel>> GetAllFaq()
         {
             var result = await _sql.LoadData<FaqDBModel, dynamic>("dbo.spFaq_Lookup", new { }, "RmBCloneDb");
 

@@ -9,7 +9,7 @@ namespace RmbClone.Library.DataAccess
         Task AddFaq(FaqDBModel model);
         Task DeleteFaq(string id);
         Task<FaqDBModel> FindAsync(string id);
-        Task<List<FaqDBModel>> getAllFaq();
+        Task<List<FaqDBModel>> GetAllFaq();
         Task UpdateFaq(FaqDBModel model);
     }
 }
