@@ -19,20 +19,18 @@ namespace RmbClone.Library.DataAccess
 
         public async Task<List<UserDBModel>> GetAllUsersAsync()
         {
-            var result = await _sql.LoadData<UserDBModel, dynamic>("dbo.spUser_Lookup", new { }, "RmbCloneDb");
+            var result = await _sql.LoadDataAsync<UserDBModel, dynamic>("dbo.spUser_Lookup", new { }, "RmbCloneDb");
             return result;
         }
 
-
-
         public async Task AddUserAsync(UserDBModel model)
         {
-            await _sql.SaveData("dbo.spUser_Insert", model, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spUser_Insert", model, "RmbCloneDb");
         }
 
         public async Task<UserDBModel> FindByEmailAsync(string email)
         {
-            var result = await _sql.LoadData<UserDBModel, dynamic>("dbo.spUser_EmailLookup", new { Email = email }, "RmbCloneDb");
+            var result = await _sql.LoadDataAsync<UserDBModel, dynamic>("dbo.spUser_EmailLookup", new { Email = email }, "RmbCloneDb");
             return result.FirstOrDefault();
 
         }

@@ -71,7 +71,10 @@ namespace RMBCloneAPI.Controllers
 
 
         /// <response code="204">Faq uspješno obrisan.</response> 
+        /// <response code="400">Ne postoji faq sa zadatim id-om.</response> 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteFaq(string id)
         {
             var faq = await _faqData.FindAsync(id);

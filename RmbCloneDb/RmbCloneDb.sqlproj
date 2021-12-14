@@ -78,9 +78,14 @@
     <Build Include="dbo\Stored Procedures\spFaq_LookupById.sql" />
     <Build Include="dbo\Stored Procedures\spFaq_Update.sql" />
     <Build Include="dbo\Stored Procedures\spFaq_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />
     <None Include="dbo\PublishLocations\RmbCloneDbLocally.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="RmbCloneDb.refactorlog" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ namespace RmbClone.Library.Internal.DataAccess
 
         }
 
-        public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
+        public async Task<List<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
 
             string connectionString = GetConnectionString(connectionStringName);
@@ -37,7 +37,7 @@ namespace RmbClone.Library.Internal.DataAccess
             }
         }
 
-        public async Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
+        public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);
             using (IDbConnection connection = new SqlConnection(connectionString))

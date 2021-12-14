@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="4dddcc45-1a81-4356-a1a2-8db5bda5d5cb" ChangeDateTime="12/14/2021 19:25:45">
+    <Property Name="ElementName" Value="[dbo].[Location].[latitude]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Latitude" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="49cb0b24-4723-4f23-8ef6-a6d4a33f5fb3" ChangeDateTime="12/14/2021 19:25:51">
+    <Property Name="ElementName" Value="[dbo].[Location].[longitude]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Longitude" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="06a16ad1-17af-41c6-a315-a1a9e97cc98e" ChangeDateTime="12/14/2021 19:37:14">
+    <Property Name="ElementName" Value="[dbo].[Location].[Adress]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Address" />
+  </Operation>
+</Operations>

@@ -19,31 +19,31 @@ namespace RmbClone.Library.DataAccess
 
         public async Task<List<FaqDBModel>> GetAllFaq()
         {
-            var result = await _sql.LoadData<FaqDBModel, dynamic>("dbo.spFaq_Lookup", new { }, "RmBCloneDb");
+            var result = await _sql.LoadDataAsync<FaqDBModel, dynamic>("dbo.spFaq_Lookup", new { }, "RmBCloneDb");
 
             return result;
         }
 
         public async Task AddFaq(FaqDBModel model)
         {
-            await _sql.SaveData("dbo.spFaq_Insert", model, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spFaq_Insert", model, "RmbCloneDb");
         }
 
         public async Task UpdateFaq(FaqDBModel model)
         {
-            await _sql.SaveData("dbo.spFaq_Update", model, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spFaq_Update", model, "RmbCloneDb");
         }
 
         public async Task<FaqDBModel> FindAsync(string id)
         {
-            var result = await _sql.LoadData<FaqDBModel, dynamic>("dbo.spFaq_LookupById", new { Id = id }, "RmBCloneDb");
+            var result = await _sql.LoadDataAsync<FaqDBModel, dynamic>("dbo.spFaq_LookupById", new { Id = id }, "RmBCloneDb");
 
             return result.FirstOrDefault();
         }
 
         public async Task DeleteFaq(string id)
         {
-            await _sql.SaveData("dbo.spFaq_Delete", new { Id = id }, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spFaq_Delete", new { Id = id }, "RmbCloneDb");
         }
 
 
