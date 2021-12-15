@@ -39,5 +39,11 @@ namespace RmbClone.Library.DataAccess
             return result.FirstOrDefault();
         }
 
+        public async Task UpdateLocationAsync(LocationDBModel model)
+        {
+            await _sql.SaveDataAsync("dbo.spLocation_Update", model, "RmbCloneDb");
+        }
+
+
     }
 }

@@ -30,6 +30,15 @@ namespace RMBCloneAPI.Controllers
             return Ok(result);
         }
 
+        /// <response code="200">Vraća lokaciju za zadanim id-om.</response> 
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<LocationDBModel>> GetById(string id)
+        {
+            var result = await _locationData.FindAsync(id);
+            return Ok(result);
+        }
+
         /// <response code="200">Lokacija uspješno dodan.</response> 
         /// <response code="400">Body je neispravan.</response>
         [HttpPost]
@@ -51,6 +60,38 @@ namespace RMBCloneAPI.Controllers
             }
             return BadRequest();
         }
+
+
+        /// <response code="204">Lokacija uspješno updateovana.</response> 
+        /// <response code="400">Ili je body neispravan ili lokacija sa zadanim id-om ne postoji ili se ne podudaraju id iz querija i id iz bodija.</response>
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateLocation(string id, LocationDBModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id != model.Id)
+                {
+                    return BadRequest();
+                }
+                var location = await _locationData.FindAsync(id);
+                if (location == null)
+                {
+                    return BadRequest();
+                }
+                location.Address = model.Address;
+                location.Latitude = model.Latitude;
+                location.Longitude = model.Longitude;
+
+                await _locationData.UpdateLocationAsync(location);
+                return NoContent();
+            }
+            return BadRequest();
+        }
+
+
+
 
         /// <response code="204">Lokacija uspješno obrisana.</response> 
         /// <response code="400">Lokacija sa zadanim id-om ne postoji.</response>

@@ -10,5 +10,6 @@ namespace RmbClone.Library.DataAccess
         Task DeleteLocationAsync(string id);
         Task<LocationDBModel> FindAsync(string id);
         Task<List<LocationDBModel>> GetAllLocationsAsync();
+        Task UpdateLocationAsync(LocationDBModel model);
     }
 }

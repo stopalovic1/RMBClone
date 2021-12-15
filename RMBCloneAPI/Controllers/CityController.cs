@@ -62,7 +62,7 @@ namespace RMBCloneAPI.Controllers
         }
 
         /// <response code="204">Grad uspješno updateovan.</response> 
-        /// <response code="400">Ili je body neispravan ili grad sa idom ne postoji ili se ne podudaraju id iz queirja i id iz bodija.</response>
+        /// <response code="400">Ili je body neispravan ili grad sa zadanim idom ne postoji ili se ne podudaraju id iz querija i id iz bodija.</response>
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

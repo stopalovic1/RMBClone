@@ -87,6 +87,7 @@
     <Build Include="dbo\Stored Procedures\spCity_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spCity_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spCity_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />
