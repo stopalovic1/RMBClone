@@ -38,5 +38,13 @@ namespace RmbClone.Library.DataAccess
         {
             await _sql.SaveDataAsync("dbo.spCity_Delete", new { Id = id }, "RmbCloneDb");
         }
+
+        public async Task UpdateCityAsync(CityDBModel model)
+        {
+            await _sql.SaveDataAsync("dbo.spCity_Update", model, "RmbCloneDb");
+        }
+
+
     }
+
 }

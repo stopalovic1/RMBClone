@@ -10,5 +10,6 @@ namespace RmbClone.Library.DataAccess
         Task DeleteCityAsync(string id);
         Task<CityDBModel> FindAsync(string id);
         Task<List<CityDBModel>> GetAllCitiesAsync();
+        Task UpdateCityAsync(CityDBModel model);
     }
 }
