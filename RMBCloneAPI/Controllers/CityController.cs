@@ -30,6 +30,20 @@ namespace RMBCloneAPI.Controllers
             return Ok(result);
         }
 
+        /// <response code="200">Vraća grad sa zadnim id-om.</response> 
+        /// <response code="400">Grad sa zadanim id-om ne postoji.</response> 
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<CityDBModel>> GetById(string id)
+        {
+            var result = await _cityData.FindAsync(id);
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
 
         /// <response code="200">Grad uspješno dodan.</response> 
         /// <response code="400">Body je neispravan.</response>
@@ -46,7 +60,6 @@ namespace RMBCloneAPI.Controllers
             }
             return BadRequest();
         }
-
 
         /// <response code="204">Grad uspješno obrisan.</response> 
         /// <response code="400">Grad sa zadanim id-om ne postoji.</response>
