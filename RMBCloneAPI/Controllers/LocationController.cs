@@ -20,6 +20,7 @@ namespace RMBCloneAPI.Controllers
         {
             _locationData = locationData;
         }
+        
 
         /// <response code="200">Vraća sve lokacije.</response> 
         [HttpGet]
