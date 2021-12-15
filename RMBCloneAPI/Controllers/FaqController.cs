@@ -13,7 +13,7 @@ namespace RMBCloneAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class FaqController : ControllerBase
     {
         private readonly IFaqData _faqData;
@@ -25,18 +25,25 @@ namespace RMBCloneAPI.Controllers
 
         /// <response code="200">Vraca listu faq.</response> 
         [HttpGet]
-        public async Task<List<FaqDBModel>> GetAll()
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<List<FaqDBModel>>> GetAll()
         {
             var result = await _faqData.GetAllFaq();
-            return result;
+            return Ok(result);
         }
 
         /// <response code="200">Faq kreiran.</response> 
         [HttpPost]
-        public async Task AddFaq(FaqRequestModel model)
+        public async Task<IActionResult> AddFaq(FaqRequestModel model)
         {
-            var faq = new FaqDBModel { Question = model.Question, Answer = model.Answer };
-            await _faqData.AddFaq(faq);
+            if (ModelState.IsValid)
+            {
+                var faq = new FaqDBModel { Question = model.Question, Answer = model.Answer };
+                await _faqData.AddFaq(faq);
+                return Ok();
+            }
+            return BadRequest();
+
         }
 
         /// <response code="204">Faq uspješno updateovan.</response> 

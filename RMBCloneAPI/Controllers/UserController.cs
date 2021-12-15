@@ -22,6 +22,14 @@ namespace RMBCloneAPI.Controllers
             _userData = userData;
         }
 
+        /// <response code="200">Vraća listu korisnika.</response> 
+        [HttpGet]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<List<UserDBModel>>> GetUsers()
+        {
+            var result = await _userData.GetAllUsersAsync();
+            return Ok(result);
+        }
 
         /// <response code="200">Korisnik kreiran.</response> 
         /// <response code="400">Ili korsnik sa unesenim emailom već postoji ili se passwordi ne podudraju.</response> 
@@ -33,7 +41,7 @@ namespace RMBCloneAPI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userData.FindByEmailAsync(model.Email);
-                if(user!=null)
+                if (user != null)
                 {
                     return BadRequest("User with that email already exists.");
                 }
@@ -52,13 +60,5 @@ namespace RMBCloneAPI.Controllers
             return BadRequest();
         }
 
-        /// <response code="200">Vraća listu korisnika.</response> 
-        [HttpGet]
-        [ProducesResponseType(200)]
-        public async Task<List<UserDBModel>> GetUsers()
-        {
-            var result = await _userData.GetAllUsersAsync();
-            return result;
-        }
     }
 }

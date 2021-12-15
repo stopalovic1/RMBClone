@@ -24,10 +24,10 @@ namespace RMBCloneAPI.Controllers
         /// <response code="200">Vraća sve lokacije.</response> 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<List<LocationDBModel>> GetAll()
+        public async Task<ActionResult<List<LocationDBModel>>> GetAll()
         {
             var result = await _locationData.GetAllLocationsAsync();
-            return result;
+            return Ok(result);
         }
 
         /// <response code="200">Lokacija uspješno dodan.</response> 

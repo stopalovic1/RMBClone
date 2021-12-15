@@ -24,10 +24,10 @@ namespace RMBCloneAPI.Controllers
         /// <response code="200">Vraća sve gradove.</response> 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<List<CityDBModel>> GetAll()
+        public async Task<ActionResult<List<CityDBModel>>> GetAll()
         {
             var result = await _cityData.GetAllCitiesAsync();
-            return result;
+            return Ok(result);
         }
 
 
