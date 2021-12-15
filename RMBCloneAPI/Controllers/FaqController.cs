@@ -32,7 +32,24 @@ namespace RMBCloneAPI.Controllers
             return Ok(result);
         }
 
+        /// <response code="200">Vraca faq sa zadanim id-om.</response> 
+        /// <response code="400">Faq sa zadanim id-om ne postoji.</response>
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<FaqDBModel>> GetById(string id)
+        {
+            var result = await _faqData.FindAsync(id);
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+
+
         /// <response code="200">Faq kreiran.</response> 
+        /// <response code="400">Body nije ispravan.</response> 
         [HttpPost]
         public async Task<IActionResult> AddFaq(FaqRequestModel model)
         {
