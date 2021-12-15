@@ -61,6 +61,32 @@ namespace RMBCloneAPI.Controllers
             return BadRequest();
         }
 
+        /// <response code="204">Grad uspješno updateovan.</response> 
+        /// <response code="400">Ili je body neispravan ili grad sa idom ne postoji ili se ne podudaraju id iz queirja i id iz bodija.</response>
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateCity(string id, CityDBModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id != model.Id)
+                {
+                    return BadRequest();
+                }
+                var city = await _cityData.FindAsync(id);
+                if (city == null)
+                {
+                    return BadRequest();
+                }
+                city.Name = model.Name;
+                await _cityData.UpdateCityAsync(city);
+                return NoContent();
+            }
+            return BadRequest();
+        }
+
+
         /// <response code="204">Grad uspješno obrisan.</response> 
         /// <response code="400">Grad sa zadanim id-om ne postoji.</response>
         [HttpDelete("{id}")]
