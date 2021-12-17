@@ -52,8 +52,8 @@ namespace RMBCloneAPI.Controllers
                 var location = new LocationDBModel
                 {
                     Address = model.Address,
-                    Latitude = (double)model.Latitude,
-                    Longitude = (double)model.Longitude
+                    Latitude = (decimal)model.Latitude,
+                    Longitude = (decimal)model.Longitude
                 };
 
                 await _locationData.AddLocationAsync(location);

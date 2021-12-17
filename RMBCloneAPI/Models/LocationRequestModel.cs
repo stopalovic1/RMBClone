@@ -11,8 +11,8 @@ namespace RMBCloneAPI.Models
         [Required]
         public string Address { get; set; }
         [Required]
-        public double? Latitude { get; set; }
+        public decimal? Latitude { get; set; }
         [Required]
-        public double? Longitude { get; set; }
+        public decimal? Longitude { get; set; }
     }
 }
