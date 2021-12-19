@@ -102,6 +102,7 @@ namespace RMBCloneAPI.Controllers
         }
 
 
+
         /// <response code="204">Faq uspješno obrisan.</response> 
         /// <response code="400">Faq sa zadanim id-om ne postoji.</response> 
         [HttpDelete("{id}")]
