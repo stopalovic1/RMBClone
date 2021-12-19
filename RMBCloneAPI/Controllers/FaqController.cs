@@ -91,6 +91,8 @@ namespace RMBCloneAPI.Controllers
 
                 faq.QuestionBj = model.QuestionBj;
                 faq.AnswerBj = model.AnswerBj;
+                faq.QuestionEn = model.QuestionEn;
+                faq.AnswerEn = model.AnswerEn;
 
                 await _faqData.UpdateFaq(faq);
 
