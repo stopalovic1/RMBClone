@@ -57,8 +57,8 @@ namespace RMBCloneAPI.Controllers
             {
                 var faq = new FaqDBModel
                 {
-                    Question = model.Question,
-                    Answer = model.Answer,
+                    QuestionBj = model.QuestionBj,
+                    AnswerBj = model.AnswerBj,
                     QuestionEn = model.QuestionEn,
                     AnswerEn = model.AnswerEn
                 };
@@ -89,8 +89,8 @@ namespace RMBCloneAPI.Controllers
                     return BadRequest();
                 }
 
-                faq.Question = model.Question;
-                faq.Answer = model.Answer;
+                faq.QuestionBj = model.QuestionBj;
+                faq.AnswerBj = model.AnswerBj;
 
                 await _faqData.UpdateFaq(faq);
 

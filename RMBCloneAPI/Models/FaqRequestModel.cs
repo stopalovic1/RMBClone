@@ -9,9 +9,9 @@ namespace RmbCloneAPI.Models
     public class FaqRequestModel
     {
         [Required]
-        public string Question { get; set; }
+        public string QuestionBj { get; set; }
         [Required]
-        public string Answer { get; set; }
+        public string AnswerBj { get; set; }
         [Required]
         public string QuestionEn { get; set; }
         [Required]
