@@ -13,6 +13,10 @@ namespace RmbClone.Library.Models
         public string Question { get; set; }
         [Required]
         public string Answer { get; set; }
+        [Required]
+        public string QuestionEn { get; set; }
+        [Required]
+        public string AnswerEn { get; set; }
 
         public FaqDBModel()
         {

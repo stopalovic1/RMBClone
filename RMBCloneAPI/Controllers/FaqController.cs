@@ -55,7 +55,13 @@ namespace RMBCloneAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var faq = new FaqDBModel { Question = model.Question, Answer = model.Answer };
+                var faq = new FaqDBModel
+                {
+                    Question = model.Question,
+                    Answer = model.Answer,
+                    QuestionEn = model.QuestionEn,
+                    AnswerEn = model.AnswerEn
+                };
                 await _faqData.AddFaq(faq);
                 return Ok();
             }
