@@ -37,6 +37,8 @@ namespace RMBCloneAPI
             services.AddTransient<IUserData, UserData>();
             services.AddTransient<ILocationData, LocationData>();
             services.AddTransient<ICityData, CityData>();
+            services.AddTransient<ICardData, CardData>();
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressMapClientErrors = true;

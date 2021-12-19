@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace RmbClone.Library.Models
+namespace RMBCloneAPI.Models
 {
-    public class CardDBModel
+    public class CardRequestModel
     {
-        public string Id { get; set; }
         [Required]
         public string UserId { get; set; }
-        [Required]
-        public string Iban { get; set; }
         [Required]
         public string CardNumber { get; set; }
         [Required]
         public DateTime ValidUntil { get; set; }
         [Required]
         public string TransactionNumber { get; set; }
-        public CardDBModel()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
     }
 }
