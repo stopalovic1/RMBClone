@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spFaq_Insert]
 	@Id NVARCHAR (128),
-    @QuestionBj NVARCHAR (450),
-    @AnswerBj  NVARCHAR (450),
-    @QuestionEn NVARCHAR(450),
-    @AnswerEn NVARCHAR(450)
+    @QuestionBj NVARCHAR (900),
+    @AnswerBj  NVARCHAR (900),
+    @QuestionEn NVARCHAR(900),
+    @AnswerEn NVARCHAR(900)
 AS
 begin
     set nocount on;
