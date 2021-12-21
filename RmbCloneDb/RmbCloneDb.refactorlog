@@ -42,4 +42,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AnswerBj" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0afa0b3d-7d1f-4391-8777-a931340f54a0" ChangeDateTime="12/21/2021 17:10:46">
+    <Property Name="ElementName" Value="[dbo].[Branch].[GradId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Branch]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CItyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2740b2fb-c0d4-413a-9945-c577a92f145f" ChangeDateTime="12/21/2021 17:27:48">
+    <Property Name="ElementName" Value="[dbo].[Branch].[WorkingHours]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Branch]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WorkingHoursId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="12eb753a-e88f-4f1a-a4a0-7354abd06707" ChangeDateTime="12/21/2021 19:13:21">
+    <Property Name="ElementName" Value="[dbo].[BranchServiceType].[name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchServiceType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="72984b85-e053-4c74-8dc0-fb2706bb5d66" ChangeDateTime="12/21/2021 19:13:24">
+    <Property Name="ElementName" Value="[dbo].[BranchServiceType].[name_en]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchServiceType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NameEn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9351b2bd-fa5c-4d6b-a855-aad7ad2fced4" ChangeDateTime="12/21/2021 19:13:27">
+    <Property Name="ElementName" Value="[dbo].[BranchServiceType].[name_bs]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchServiceType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NameBj" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="30a0f428-0126-40f8-88c3-dfe1b52c5375" ChangeDateTime="12/21/2021 19:13:32">
+    <Property Name="ElementName" Value="[dbo].[BranchServiceType].[name_de]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchServiceType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NameDe" />
+  </Operation>
 </Operations>

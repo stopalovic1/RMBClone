@@ -93,6 +93,12 @@
     <Build Include="dbo\Stored Procedures\spCard_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spCard_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spCard_Update.sql" />
+    <Build Include="dbo\Tables\Branch.sql" />
+    <Build Include="dbo\Tables\WorkingHours.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spWorkingHours_LookupById.sql" />
+    <Build Include="dbo\Stored Procedures\spWorkingHours_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

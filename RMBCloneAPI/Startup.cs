@@ -38,6 +38,7 @@ namespace RMBCloneAPI
             services.AddTransient<ILocationData, LocationData>();
             services.AddTransient<ICityData, CityData>();
             services.AddTransient<ICardData, CardData>();
+            services.AddTransient<IBranchData, BranchData>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
