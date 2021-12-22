@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,23 +19,19 @@ namespace RMBCloneAPI.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IStringLocalizer<WeatherForecastController> _localizer;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,IStringLocalizer<WeatherForecastController> localizer)
         {
             _logger = logger;
+            _localizer = localizer;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public dynamic Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var g = Guid.NewGuid().ToString();
+            return _localizer["GUID", g].Value;
         }
     }
 }

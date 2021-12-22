@@ -11,6 +11,7 @@ using RmbClone.Library.DataAccess;
 using RmbClone.Library.Internal.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -45,6 +46,7 @@ namespace RMBCloneAPI
                 options.SuppressMapClientErrors = true;
             });
 
+
             services.AddSwaggerGen(setup =>
             {
                 setup.SwaggerDoc(
@@ -58,6 +60,8 @@ namespace RMBCloneAPI
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
+
+            services.AddLocalization(services => services.ResourcesPath = "Resources");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +71,18 @@ namespace RMBCloneAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            var cultures = new List<CultureInfo>
+            {
+                new CultureInfo("en"),
+                new CultureInfo("ba")
+            };
+
+            app.UseRequestLocalization(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                options.SupportedCultures = cultures;
+                options.SupportedUICultures = cultures;
+            });
 
             app.UseHttpsRedirection();
 
@@ -80,6 +96,7 @@ namespace RMBCloneAPI
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
                 //x.RoutePrefix = String.Empty;
             });
+
 
             app.UseEndpoints(endpoints =>
             {
