@@ -45,5 +45,14 @@ namespace RmbClone.Library.DataAccess
         }
 
 
+        public async Task<LocationDBModel> FindByBranchIdAsync(string branchId)
+        {
+            var result = await _sql.LoadDataAsync<LocationDBModel, dynamic>("dbo.spLocation_LookupByBranchId", new { BranchId = branchId }, "RmbCloneDb");
+            return result.FirstOrDefault();
+        }
+
+
+
+
     }
 }

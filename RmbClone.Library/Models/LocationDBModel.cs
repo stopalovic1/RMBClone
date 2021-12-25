@@ -9,6 +9,8 @@ namespace RmbClone.Library.Models
     {
         public string Id { get; set; }
         [Required]
+        public string BranchId { get; set; }
+        [Required]
         public string Address { get; set; }
         [Required]
         public decimal? Latitude { get; set; }

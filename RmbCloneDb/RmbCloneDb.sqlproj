@@ -99,6 +99,7 @@
     <Build Include="dbo\Stored Procedures\spBranch_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spWorkingHours_LookupById.sql" />
     <Build Include="dbo\Stored Procedures\spWorkingHours_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_LookupByBranchId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

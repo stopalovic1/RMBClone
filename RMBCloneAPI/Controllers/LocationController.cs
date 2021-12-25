@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models;
-using RMBCloneAPI.Models;
-using System;
+using RmbClone.Library.Models.Requests;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,27 +38,27 @@ namespace RMBCloneAPI.Controllers
             return Ok(result);
         }
 
-        /// <response code="200">Lokacija uspješno dodan.</response> 
-        /// <response code="400">Body je neispravan.</response>
-        [HttpPost]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> AddLocation(LocationRequestModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var location = new LocationDBModel
-                {
-                    Address = model.Address,
-                    Latitude = (decimal)model.Latitude,
-                    Longitude = (decimal)model.Longitude
-                };
+        ///// <response code="200">Lokacija uspješno dodan.</response> 
+        ///// <response code="400">Body je neispravan.</response>
+        //[HttpPost]
+        //[ProducesResponseType(200)]
+        //[ProducesResponseType(400)]
+        //public async Task<IActionResult> AddLocation(LocationRequestModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var location = new LocationDBModel
+        //        {
+        //            Address = model.Address,
+        //            Latitude = (decimal)model.Latitude,
+        //            Longitude = (decimal)model.Longitude
+        //        };
 
-                await _locationData.AddLocationAsync(location);
-                return Ok();
-            }
-            return BadRequest();
-        }
+        //        await _locationData.AddLocationAsync(location);
+        //        return Ok();
+        //    }
+        //    return BadRequest();
+        //}
 
 
         /// <response code="204">Lokacija uspješno updateovana.</response> 

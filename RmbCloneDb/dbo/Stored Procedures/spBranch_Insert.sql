@@ -1,6 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spBranch_Insert]
 	@Id nvarchar(128),
-	@LocationId nvarchar(128),
 	@Name nvarchar(128),
 	@CityId nvarchar(128),
 	@Contact nvarchar(20),
@@ -11,6 +10,6 @@
 AS
 begin
 	set nocount on;
-	insert into [dbo].[Branch](Id,LocationId,[Name],CityId,Contact,BranchTypeId,BranchServiceTypeId,ATMType,ATMFilter)
-	values(@Id,@LocationId,@Name,@CityId,@Contact,@BranchTypeId,@BranchServiceTypeId,@ATMType,@ATMFilter);
+	insert into [dbo].[Branch](Id,[Name],CityId,Contact,BranchTypeId,BranchServiceTypeId,ATMType,ATMFilter)
+	values(@Id,@Name,@CityId,@Contact,@BranchTypeId,@BranchServiceTypeId,@ATMType,@ATMFilter);
 end

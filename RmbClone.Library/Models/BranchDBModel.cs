@@ -7,7 +7,6 @@ namespace RmbClone.Library.Models
     public class BranchDBModel
     {
         public string Id { get; set; }
-        public string LocationId { get; set; }
         public string Name { get; set; }
         public string CityId { get; set; }
         public string Contact { get; set; }

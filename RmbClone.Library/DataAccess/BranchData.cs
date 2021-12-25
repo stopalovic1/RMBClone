@@ -28,7 +28,7 @@ namespace RmbClone.Library.DataAccess
             var result = new List<BranchResponseModel>();
             foreach (var branch in branches)
             {
-                var location = await _locationData.FindAsync(branch.LocationId);
+                var location = await _locationData.FindByBranchIdAsync(branch.Id);
                 var city = await _cityData.FindAsync(branch.CityId);
                 var workingHours = await _sql.LoadDataAsync<WorkingHoursDBModel, dynamic>("dbo.spWorkingHours_LookupById", new { BranchId = branch.Id }, "RmbCloneDb");
 
@@ -56,7 +56,6 @@ namespace RmbClone.Library.DataAccess
 
             var branch = new BranchDBModel
             {
-                LocationId = model.LocationId,
                 Name = model.Name,
                 CityId = model.CityId,
                 Contact = model.Contact,
@@ -64,6 +63,14 @@ namespace RmbClone.Library.DataAccess
                 BranchServiceTypeId = model.BranchServiceTypeId,
                 ATMType = model.ATMType,
                 ATMFilter = model.ATMFilter
+            };
+
+            var location = new LocationDBModel
+            {
+                BranchId = branch.Id,
+                Address = model.Location.Address,
+                Latitude = model.Location.Latitude,
+                Longitude = model.Location.Longitude
             };
 
             foreach (var item in model.WorkingHours)
@@ -78,6 +85,7 @@ namespace RmbClone.Library.DataAccess
             }
 
             await _sql.SaveDataAsync("dbo.spBranch_Insert", branch, "RmbCloneDb");
+            await _sql.SaveDataAsync("dbo.spLocation_insert", location, "RmbCloneDb");
 
             foreach (var item in workingHours)
             {

@@ -24,7 +24,7 @@ namespace RMBCloneAPI.Controllers
         /// <response code="200">Vra</response> 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<List<BranchResponseModel>>>GetAll()
+        public async Task<ActionResult<List<BranchResponseModel>>> GetAll()
         {
             var result = await _branchData.GetAllBranchesAsync();
             return Ok(result);
@@ -37,13 +37,42 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> AddBranch(BranchRequestModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _branchData.InsertBranchAsync(model);
                 return Ok();
             }
             return BadRequest();
-            
+
         }
+
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Route("FilterBranches")]
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city, [FromQuery] string? branchType, [FromQuery] string? branchServiceType)
+        {
+            var branches = await _branchData.GetAllBranchesAsync();
+
+            var filteredBranches = branches;
+            if (city != null)
+            {
+                filteredBranches = branches.Where(x => x.City.Name == city).ToList();
+            }
+
+            if (branchType != null)
+            {
+                filteredBranches = filteredBranches.Where(x => x.BranchType.Name == branchType).ToList();
+            }
+
+            if (branchServiceType != null)
+            {
+                filteredBranches = filteredBranches.Where(x => x.BranchServiceType.Name == branchServiceType).ToList();
+            }
+
+            return Ok(filteredBranches);
+
+        }
+
     }
 }
