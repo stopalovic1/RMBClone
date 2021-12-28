@@ -1,0 +1,104 @@
+﻿@page
+@model RMBCloneAPI.Pages.Branch.CreateModel
+@{
+}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        window.setTimeout(function () {
+            $("#branchAlert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+</head>
+@if (TempData["BranchAdd"] != null)
+{
+<div id="branchAlert" class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success! Branch @TempData["BranchAdd"] added!</strong> 
+</div>
+}
+<form method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BranchRequest.Name" class="control- label"></label>
+                <input asp-for="BranchRequest.Name" class="form-control" />
+                <span asp-validation-for="BranchRequest.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BranchRequest.Location.Address" class="control- label"></label>
+                <input asp-for="BranchRequest.Location.Address" class="form-control" />
+                <span asp-validation-for="BranchRequest.Location.Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BranchRequest.Location.Latitude" class="control- label"></label>
+                <input asp-for="BranchRequest.Location.Latitude" class="form-control" />
+                <span asp-validation-for="BranchRequest.Location.Latitude" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BranchRequest.Location.Longitude" class="control- label"></label>
+                <input asp-for="BranchRequest.Location.Longitude" class="form-control" />
+                <span asp-validation-for="BranchRequest.Location.Longitude" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BranchRequest.Contact" class="control- label"></label>
+                <input asp-for="BranchRequest.Contact" class="form-control" />
+                <span asp-validation-for="BranchRequest.Contact" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Radni sati:</label>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Dan:</th>
+                        <th>Radno vrijeme:</th>
+
+                    </tr>
+                    @for (var i = 0; i < 7; i++)
+                    {
+                        List<string> l = new List<string>
+                                                                                                                                                                                                                    {
+                            "Ponedeljak","Utorak","Srijeda","Četvrtak","Petak","Subota","Nedjelja"
+                        };
+                        <tr>
+                            <td>
+                                <input type="text" value="@l[i]" asp-for="BranchRequest.WorkingHours[i].Day" />
+                            </td>
+                            <td>
+                                <input type="text" value="08:00 - 16:00" asp-for="BranchRequest.WorkingHours[i].Hours" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="myWish" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control- label">City</label>
+                <br />
+                <select asp-for="BranchRequest.CityId" asp-items="Model.Cities" style="margin-bottom:10px"></select>
+                <br />
+                <label asp-for="BranchRequest.ATMType" class="control- label"></label>
+                <br />
+                <select asp-for="BranchRequest.ATMType" asp-items="Model.ATMType" style="margin-bottom:10px"></select>
+                <br />
+                <label asp-for="BranchRequest.ATMFilter" class="control- label"></label>
+                <br />
+                <select asp-for="BranchRequest.ATMFilter" asp-items="Model.ATMFilter"></select>
+
+            </div>
+        </div>
+    </div>
+</form>

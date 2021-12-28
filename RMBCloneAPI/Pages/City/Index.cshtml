@@ -1,0 +1,20 @@
+﻿@page
+@model RMBCloneAPI.Pages.IndexModel
+@{
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        @foreach (var city in Model.Cities)
+        {
+            <tr>
+                <td>@city.Id</td>
+                <td>@city.Name</td>
+                <td>
+                    <a asp-page="/City/Details" asp-route-id="@city.Id">View</a>
+                </td>
+            </tr>
+        }
+    </table>
+}

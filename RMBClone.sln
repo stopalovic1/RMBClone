@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMBCloneAPI", "RMBCloneAPI\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RmbCloneDb", "RmbCloneDb\RmbCloneDb.sqlproj", "{3F7C843D-6896-4F63-9033-6EAAEE3E7A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmbClone.Library", "RmbClone.Library\RmbClone.Library.csproj", "{6DABED5A-2D64-4A21-AFAC-86F129ED7BFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmbClone.Library", "RmbClone.Library\RmbClone.Library.csproj", "{6DABED5A-2D64-4A21-AFAC-86F129ED7BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmbRazorPages.Library", "RmbRazorPages.Library\RmbRazorPages.Library.csproj", "{329ABDA5-7630-4CBD-B636-C57B901391AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{6DABED5A-2D64-4A21-AFAC-86F129ED7BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DABED5A-2D64-4A21-AFAC-86F129ED7BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DABED5A-2D64-4A21-AFAC-86F129ED7BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329ABDA5-7630-4CBD-B636-C57B901391AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329ABDA5-7630-4CBD-B636-C57B901391AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329ABDA5-7630-4CBD-B636-C57B901391AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329ABDA5-7630-4CBD-B636-C57B901391AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

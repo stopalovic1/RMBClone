@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models;
@@ -12,6 +13,7 @@ namespace RMBCloneAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SkipStatusCodePages]
     public class CityController : ControllerBase
     {
         private readonly ICityData _cityData;
@@ -24,6 +26,8 @@ namespace RMBCloneAPI.Controllers
         /// <response code="200">Vraća sve gradove.</response> 
         [HttpGet]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [Authorize]
         public async Task<ActionResult<List<CityDBModel>>> GetAll()
         {
             var result = await _cityData.GetAllCitiesAsync();
