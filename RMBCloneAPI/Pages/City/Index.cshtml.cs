@@ -14,10 +14,10 @@ namespace RMBCloneAPI.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ICityData _cityData;
+        //private readonly ICityData _cityData;
         private readonly IApiHelper _apiHelper;
 
-        public IEnumerable<CityDBModel> Cities { get; set; }
+        public List<CityDBModel> Cities { get; set; }
         public IndexModel(IApiHelper apiHelper)
         {
             _apiHelper = apiHelper;
@@ -26,38 +26,41 @@ namespace RMBCloneAPI.Pages
         public async Task<IActionResult> OnGet()
         {
             var cities = await GetCities();
-            if (cities.statusCode == 401)
+            if (cities == null)
             {
-                return RedirectToPage("/Errors/401");
+                Cities = new List<CityDBModel>();
+                return RedirectToPage("/Errors/401", new { n = 401 });
             }
-            Cities = cities.cities;
+            Cities = cities;
             return Page();
         }
 
 
-        private async Task<dynamic> GetCities()
+        private async Task<List<CityDBModel>> GetCities()
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/City"))
+            var token = HttpContext.Request.Cookies["SESSION_TOKEN"];
+
+            var request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri("https://rmbcloneapi.azurewebsites.net/api/city"),
+                Method = HttpMethod.Get
+            };
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                request.Headers.Add("Authorization", token);
+            }
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.SendAsync(request))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     var data = await response.Content.ReadAsAsync<List<CityDBModel>>();
 
-                    return new
-                    {
-                        cities = data,
-                        statusCode = (int)response.StatusCode
-                    };
+                    return data;
                 }
-                return new
-                {
-                    cities = new List<CityDBModel>(),
-                    statusCode = (int)response.StatusCode
-                };
+                return null;
             }
         }
-
-
-
     }
 }

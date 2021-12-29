@@ -9,9 +9,13 @@ namespace RMBCloneAPI.Pages.Errors
 {
     public class _401Model : PageModel
     {
-        public IActionResult OnGet()
+        public IActionResult OnGet(int n)
         {
-            return Page();
+            if (n == 401)
+            {
+                return Page();
+            }
+            return RedirectToPage("/Login/Login");
         }
     }
 }

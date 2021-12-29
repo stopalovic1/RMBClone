@@ -12,9 +12,9 @@ using RmbClone.Library.DataAccess;
 
 namespace RMBCloneAPI.Controllers
 {
-    //[Route("api/[controller]")]
-   // [ApiController]
-    public class TokenController : Controller
+    [Route("api/[controller]")]
+    //[ApiController]
+    public class TokenController : ControllerBase
     {
         private readonly IUserData _userData;
 
@@ -28,19 +28,27 @@ namespace RMBCloneAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string email, string password)
         {
-            return new ObjectResult(await GenerateToken(email));
+            if (await IsValidEmailAndPassword(email, password))
+            {
+                return new ObjectResult(await GenerateToken(email));
+            }
+            else
+            {
+                return BadRequest("Wrong email or password.");
+            }
         }
 
-
-
+        private async Task<bool> IsValidEmailAndPassword(string email, string password)
+        {
+            var user = await _userData.FindByEmailAsync(email);
+            var result = await _userData.CheckPasswordAsync(user, password);
+            return result;
+        }
 
         private async Task<dynamic> GenerateToken(string email)
         {
             var user = await _userData.FindByEmailAsync(email);
-            if(user==null)
-            {
-                return BadRequest();
-            }
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Email),

@@ -49,7 +49,7 @@ namespace RMBCloneAPI.Pages.Branch
             else
             {
                 TempData["BranchAdd"] = $"{BranchRequest.Name}";
-                return RedirectToPage("/City/Create");
+                return RedirectToPage("/Branch/Create");
             }
             return Page();
         }

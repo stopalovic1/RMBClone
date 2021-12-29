@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,8 +18,10 @@ namespace RMBCloneAPI.Pages.Login
         private readonly IApiHelper _apiHelper;
 
         [BindProperty]
-        public string UserName { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
         [BindProperty]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public LoginModel(IApiHelper apiHelper)
         {
@@ -35,29 +38,28 @@ namespace RMBCloneAPI.Pages.Login
             return Page();
         }
 
-
         public async Task<IActionResult> OnPost()
         {
 
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             //var query = $"email={UserName}&password={Password}";
-            _apiHelper.ApiClient.DefaultRequestHeaders.Clear();
-            _apiHelper.ApiClient.DefaultRequestHeaders.Accept.Clear();
             //HttpContent data = new StringContent(query, Encoding.UTF8, "application/json");
             var data = new FormUrlEncodedContent(new[]
-           {
-                new KeyValuePair<string, string>("grant_type","password"),
-                new KeyValuePair<string, string>("email",UserName),
+            {
+                new KeyValuePair<string, string>("email",Email),
                 new KeyValuePair<string, string>("password",Password)
-
             });
             try
             {
                 using (HttpResponseMessage message = await _apiHelper.ApiClient.PostAsync("/token", data))
                 {
-
+                    var result = await message.Content.ReadAsAsync<string>();
                     if (message.IsSuccessStatusCode)
                     {
-                        var result = await message.Content.ReadAsStringAsync();
+                        //var result = await message.Content.ReadAsAsync<string>();
                         //HttpContext.Session.SetString("JWToken", result);
                         HttpContext.Response.Cookies.Append("SESSION_TOKEN", "Bearer " + result,
                             new CookieOptions
@@ -67,17 +69,16 @@ namespace RMBCloneAPI.Pages.Login
                                 Secure = false
                             });
 
-                       _apiHelper.ApiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {result}");
-
                         return RedirectToPage("/Branch/Create");
                     }
+                    ModelState.AddModelError(string.Empty, "Incorrect email or password.");
                     return Page();
                 }
             }
+
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-
             }
 
         }

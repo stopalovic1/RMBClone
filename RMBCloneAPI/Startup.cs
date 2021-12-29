@@ -38,6 +38,7 @@ namespace RMBCloneAPI
         {
             services.AddControllers();
             services.AddMvc();
+            
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IFaqData, FaqData>();
             services.AddTransient<IUserData, UserData>();
@@ -120,7 +121,7 @@ namespace RMBCloneAPI
                 options.SupportedUICultures = cultures;
             });
 
-            app.UseSession();
+            //app.UseSession();
 
             app.Use(async (context, next) =>
             {
