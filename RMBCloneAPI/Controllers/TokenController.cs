@@ -9,6 +9,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using RmbClone.Library.DataAccess;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using RmbRazorPages.Library.ApiClient;
+using Microsoft.Extensions.Configuration;
 
 namespace RMBCloneAPI.Controllers
 {
@@ -17,10 +22,14 @@ namespace RMBCloneAPI.Controllers
     public class TokenController : ControllerBase
     {
         private readonly IUserData _userData;
+        private readonly IApiHelper _apiHelper;
+        private readonly IConfiguration _config;
 
-        public TokenController(IUserData userData)
+        public TokenController(IUserData userData, IApiHelper apiHelper, IConfiguration config)
         {
             _userData = userData;
+            _apiHelper = apiHelper;
+            _config = config;
         }
 
 
@@ -67,6 +76,48 @@ namespace RMBCloneAPI.Controllers
             var access_token = new JwtSecurityTokenHandler().WriteToken(token);
 
             return access_token;
+        }
+
+
+        [HttpPost]
+        [Route("/fcmnotification")]
+        public async Task<IActionResult> SendFCMNotification(string deviceToken)
+        {
+            if (deviceToken == null)
+            {
+                return BadRequest();
+            }
+
+            var notification = new
+            {
+                to = deviceToken,
+                data = new
+                {
+                    body = "kakoe rodjak",
+                    title = "Testiranje"
+                },
+                priority = "high"
+            };
+
+            var serverKey = _config.GetSection("FcmNotifications").GetSection("ServerKey").Value;
+            var senderId = _config.GetSection("FcmNotifications").GetSection("SenderId").Value;
+            var json = JsonConvert.SerializeObject(notification);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("https://fcm.googleapis.com/fcm/send"),
+                Method = HttpMethod.Post,
+                Content = content
+            };
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Headers.TryAddWithoutValidation("Authorization", $"key={serverKey}");
+            request.Headers.TryAddWithoutValidation("Sender", $"id={senderId}");
+            var meessage = await _apiHelper.ApiClient.SendAsync(request);
+            if (meessage.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
     }

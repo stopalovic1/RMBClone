@@ -25,7 +25,7 @@ namespace RmbRazorPages.Library.ApiClient
         {
             string api = "https://rmbcloneapi.azurewebsites.net/";
             _apiClient = new HttpClient();
-            _apiClient.BaseAddress = new Uri("https://localhost:5001/");
+            _apiClient.BaseAddress = new Uri(api);
             _apiClient.DefaultRequestHeaders.Accept.Clear();
             _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
