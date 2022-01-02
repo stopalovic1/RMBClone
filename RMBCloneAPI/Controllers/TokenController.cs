@@ -14,11 +14,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using RmbRazorPages.Library.ApiClient;
 using Microsoft.Extensions.Configuration;
+using RmbClone.Library.Models.Requests;
 
 namespace RMBCloneAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiController]
+    [ApiController]
     public class TokenController : ControllerBase
     {
         private readonly IUserData _userData;
@@ -33,15 +34,14 @@ namespace RMBCloneAPI.Controllers
         }
 
 
-        [Route("/token")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Create(string email, string password)
+        public async Task<IActionResult> Create(AuthRequestModel model)
         {
-            if (await IsValidEmailAndPassword(email, password))
+            if (await IsValidEmailAndPassword(model.Email, model.Password))
             {
-                return new ObjectResult(await GenerateToken(email));
+                return new ObjectResult(await GenerateToken(model.Email));
             }
             else
             {
