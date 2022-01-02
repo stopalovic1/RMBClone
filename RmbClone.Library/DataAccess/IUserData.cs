@@ -9,6 +9,7 @@ namespace RmbClone.Library.DataAccess
         Task AddUserAsync(UserDBModel model);
         Task<bool> CheckPasswordAsync(UserDBModel user, string password);
         Task<UserDBModel> FindByEmailAsync(string email);
+        Task<UserDBModel> FindByIdAsync(string id);
         Task<List<UserDBModel>> GetAllUsersAsync();
     }
 }

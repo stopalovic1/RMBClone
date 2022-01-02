@@ -15,6 +15,7 @@ using System.Net.Http.Headers;
 using RmbRazorPages.Library.ApiClient;
 using Microsoft.Extensions.Configuration;
 using RmbClone.Library.Models.Requests;
+using RmbClone.Library.Models.Responses;
 
 namespace RMBCloneAPI.Controllers
 {
@@ -56,7 +57,7 @@ namespace RMBCloneAPI.Controllers
             return result;
         }
 
-        private async Task<dynamic> GenerateToken(string email)
+        private async Task<AuthResponseModel> GenerateToken(string email)
         {
             var user = await _userData.FindByEmailAsync(email);
 
@@ -77,10 +78,10 @@ namespace RMBCloneAPI.Controllers
 
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var output = new
+            var output = new AuthResponseModel
             {
-                access_token = jwtToken,
-                refresh_token = "ovdje ce bit refresh uskoro"
+                AccessToken = jwtToken,
+                RefreshToken = "ovdje ce bit refresh uskoro"
             };
 
             return output;
@@ -88,7 +89,7 @@ namespace RMBCloneAPI.Controllers
 
 
         [HttpPost]
-        [Route("/fcmnotification")]
+        [Route("/api/fcmnotification")]
         public async Task<IActionResult> SendFCMNotification(string deviceToken)
         {
             if (deviceToken == null)

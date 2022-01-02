@@ -34,6 +34,12 @@ namespace RmbClone.Library.DataAccess
             return result.FirstOrDefault();
 
         }
+        public async Task<UserDBModel> FindByIdAsync(string id)
+        {
+            var result = await _sql.LoadDataAsync<UserDBModel, dynamic>("dbo.spUser_LookupById", new { Id = id }, "RmbCloneDb");
+            return result.FirstOrDefault();
+
+        }
 
         public async Task<bool> CheckPasswordAsync(UserDBModel user, string password)
         {

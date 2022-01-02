@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RmbClone.Library.Models.Requests;
 using RmbRazorPages.Library.ApiClient;
+using Newtonsoft.Json;
+using RmbClone.Library.Models.Responses;
 
 namespace RMBCloneAPI.Pages.Login
 {
@@ -47,6 +50,13 @@ namespace RMBCloneAPI.Pages.Login
             }
             //var query = $"email={UserName}&password={Password}";
             //HttpContent data = new StringContent(query, Encoding.UTF8, "application/json");
+            var u = new AuthRequestModel
+            {
+                Email = Email,
+                Password = Password
+            };
+            var stringContent = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
+
             var data = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("email",Email),
@@ -54,14 +64,14 @@ namespace RMBCloneAPI.Pages.Login
             });
             try
             {
-                using (HttpResponseMessage message = await _apiHelper.ApiClient.PostAsync("/token", data))
+                using (HttpResponseMessage message = await _apiHelper.ApiClient.PostAsync("/api/token", stringContent))
                 {
-                    var result = await message.Content.ReadAsAsync<string>();
                     if (message.IsSuccessStatusCode)
                     {
+                        var result = await message.Content.ReadAsAsync<AuthResponseModel>();
                         //var result = await message.Content.ReadAsAsync<string>();
                         //HttpContext.Session.SetString("JWToken", result);
-                        HttpContext.Response.Cookies.Append("SESSION_TOKEN", "Bearer " + result,
+                        HttpContext.Response.Cookies.Append("SESSION_TOKEN", "Bearer " + result.AccessToken,
                             new CookieOptions
                             {
                                 Expires = DateTime.Now.AddDays(1),

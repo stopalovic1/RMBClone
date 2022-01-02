@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models;
 using RMBCloneAPI.Models;
@@ -16,11 +17,13 @@ namespace RMBCloneAPI.Controllers
     {
         private readonly ICardData _cardData;
         private readonly IUserData _userData;
+        private readonly IConfiguration _config;
 
-        public CardController(ICardData cardData,IUserData userData)
+        public CardController(ICardData cardData,IUserData userData,IConfiguration config)
         {
             _cardData = cardData;
             _userData = userData;
+            _config = config;
         }
         [HttpGet]
         public async Task<ActionResult<List<CardDBModel>>> GetAll()
@@ -44,19 +47,24 @@ namespace RMBCloneAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user= await _userData.f
-                var card = new CardDBModel
+                var user = await _userData.FindByIdAsync(model.UserId);
+                if (user != null)
                 {
-                    UserId = model.UserId,
-                    Iban = "BA39" + model.TransactionNumber,
-                    CardNumber = model.CardNumber,
-                    ValidUntil = model.ValidUntil,
-                    TransactionNumber = model.TransactionNumber
-                };
-                await _cardData.AddCardAsync(card);
-                return Ok();
+                    var card = new CardDBModel
+                    {
+                        UserId = model.UserId,
+                        Iban = _config.GetValue<string>("IBAN") + model.TransactionNumber,
+                        CardNumber = model.CardNumber,
+                        ValidUntil = model.ValidUntil,
+                        TransactionNumber = model.TransactionNumber
+                    };
+                    await _cardData.AddCardAsync(card);
+                    return Ok();
+                }
+
+                return BadRequest("Korisnik ne postoji.");
             }
-            return BadRequest("Body neispravan");
+            return BadRequest("Body neispravan.");
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCard(string id, CardDBModel model)
