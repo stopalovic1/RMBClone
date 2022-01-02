@@ -39,7 +39,7 @@ namespace RmbClone.Library.DataAccess
         {
             var task = Task.Run(() =>
             {
-                if (user == null)
+                if (user == null || password == null)
                 {
                     return false;
                 }

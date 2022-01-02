@@ -35,6 +35,8 @@ namespace RMBCloneAPI.Controllers
 
         [Route("/token")]
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> Create(string email, string password)
         {
             if (await IsValidEmailAndPassword(email, password))
@@ -73,9 +75,15 @@ namespace RMBCloneAPI.Controllers
                     new JwtPayload(claims));
 
 
-            var access_token = new JwtSecurityTokenHandler().WriteToken(token);
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return access_token;
+            var output = new
+            {
+                access_token = jwtToken,
+                refresh_token = "ovdje ce bit refresh uskoro"
+            };
+
+            return output;
         }
 
 
