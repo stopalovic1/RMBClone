@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.IdentityModel.Tokens;
 using RmbClone.Library.Models;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-
+using System.Security.Claims;
+using System.Text;
 
 namespace RMBCloneAPI.Helpers
 {
@@ -64,5 +68,19 @@ namespace RMBCloneAPI.Helpers
               }).ToList();
             return list;
         }
+
+
+        public string GenerateJwt(List<Claim> claims, DateTime notBefore, DateTime expires)
+        {
+            var token = new JwtSecurityToken(
+                new JwtHeader(new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mojsuperdupersikritkij")),
+                    SecurityAlgorithms.HmacSha256)),
+                    new JwtPayload("RmBClone", "Everyone", claims, notBefore, expires));
+
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwtToken;
+        }
+
     }
 }

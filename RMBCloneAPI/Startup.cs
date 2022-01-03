@@ -74,7 +74,7 @@ namespace RMBCloneAPI
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(5)
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
