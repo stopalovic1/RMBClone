@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+
 namespace RMBCloneAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -50,6 +52,7 @@ namespace RMBCloneAPI.Controllers
 
         /// <response code="200">Faq kreiran.</response> 
         /// <response code="400">Body nije ispravan.</response> 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddFaq(FaqRequestModel model)
         {
@@ -71,6 +74,7 @@ namespace RMBCloneAPI.Controllers
 
         /// <response code="204">Faq uspješno updateovan.</response> 
         /// <response code="400">Ili faq sa unesenim Idom ne postoji ili se id iz bodija i id iz querija ne podudraju.</response>
+        [Authorize]
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -106,6 +110,7 @@ namespace RMBCloneAPI.Controllers
 
         /// <response code="204">Faq uspješno obrisan.</response> 
         /// <response code="400">Faq sa zadanim id-om ne postoji.</response> 
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
