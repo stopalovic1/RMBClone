@@ -104,7 +104,7 @@ namespace RMBCloneAPI.Controllers
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mojsuperdupersikritkij")),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ValidateLifetime = true
+                ValidateLifetime = false
             };
 
             var principal = new JwtSecurityTokenHandler().ValidateToken(token, validationParameters, out var securityToken);
@@ -159,12 +159,16 @@ namespace RMBCloneAPI.Controllers
             {
                 return BadRequest("Id iz refresh tokena ne odgovara id-u iz access tokena.");
             }
+            var newRefreshTokenClaims = validateRefreshToken.Claims.
+                Where(x => !(x.Type == JwtRegisteredClaimNames.Iss || x.Type == JwtRegisteredClaimNames.Aud));
 
-            var email = validateToken.Identity.Name;
+            var newAccessTokenClaims = validateToken.Claims.
+                Where(x => !(x.Type == JwtRegisteredClaimNames.Iss || x.Type == JwtRegisteredClaimNames.Aud));
+
             var response = new AuthResponseModel
             {
-                AccessToken = _helperMethods.GenerateJwt(validateToken.Claims.ToList(), DateTime.Now, DateTime.Now.AddMinutes(1)),
-                RefreshToken = _helperMethods.GenerateJwt(validateRefreshToken.Claims.ToList(), DateTime.Now, DateTime.Now.AddDays(1))
+                AccessToken = _helperMethods.GenerateJwt(newAccessTokenClaims.ToList(), DateTime.Now, DateTime.Now.AddMinutes(1)),
+                RefreshToken = _helperMethods.GenerateJwt(newRefreshTokenClaims.ToList(), DateTime.Now, DateTime.Now.AddDays(1))
             };
 
             return response;

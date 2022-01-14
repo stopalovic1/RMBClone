@@ -48,6 +48,8 @@ namespace RMBCloneAPI
             services.AddTransient<IBranchData, BranchData>();
             services.AddTransient<IHelperMethods, HelperMethods>();
             services.AddSingleton<IApiHelper, ApiHelper>();
+            services.AddTransient<IRoleData, RoleData>();
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressMapClientErrors = true;

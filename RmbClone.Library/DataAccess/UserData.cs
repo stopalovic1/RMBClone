@@ -54,5 +54,39 @@ namespace RmbClone.Library.DataAccess
             });
             return await task;
         }
+
+
+        private async Task<RoleDBModel> GetRoleByNameAsync(string name)
+        {
+            var result = await _sql.LoadDataAsync<RoleDBModel, dynamic>("dbo.spRole_Lookup", new { Name = name }, "RmbCloneDb");
+            return result.FirstOrDefault();
+        }
+
+        public async Task AssignRoleAsync(UserDBModel user, string roleName)
+        {
+            var role = await GetRoleByNameAsync(roleName);
+
+            if (role == null || user == null)
+            {
+                throw new Exception("Rola ili korisnik ne postoji.");
+            }
+            var p = new { UserId = user.Id, RoleId = role.Id };
+            await _sql.SaveDataAsync("dbo.spUserRole_Insert", p, "RmbCloneDb");
+        }
+        public async Task RemoveRoleAsync(UserDBModel user, string roleName)
+        {
+            var role = await GetRoleByNameAsync(roleName);
+            if (role == null || user == null)
+            {
+                throw new Exception("Rola ili korisnik ne postoji.");
+            }
+            var p = new { UserId = user.Id, RoleId = role.Id };
+            await _sql.SaveDataAsync("dbo.spUserRole_Delete", p, "RmbCloneDb");
+        }
+
+
+
+
+
     }
 }

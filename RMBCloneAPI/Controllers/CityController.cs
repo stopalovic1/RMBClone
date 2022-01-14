@@ -27,7 +27,6 @@ namespace RMBCloneAPI.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
-        [Authorize]
         public async Task<ActionResult<List<CityDBModel>>> GetAll()
         {
             var result = await _cityData.GetAllCitiesAsync();
