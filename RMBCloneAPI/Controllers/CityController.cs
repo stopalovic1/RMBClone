@@ -102,7 +102,16 @@ namespace RMBCloneAPI.Controllers
             {
                 return BadRequest();
             }
-            await _cityData.DeleteCityAsync(city.Id);
+            try
+            {
+                await _cityData.DeleteCityAsync(city.Id);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+            
             return NoContent();
         }
     }

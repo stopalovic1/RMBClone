@@ -108,6 +108,12 @@
     <Build Include="dbo\Stored Procedures\spUserRole_LookupByUserId.sql" />
     <Build Include="dbo\Stored Procedures\spRole_Lookup.sql" />
     <Build Include="dbo\Stored Procedures\spUserRole_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchType_LookupById.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchServiceType_LookupById.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchServiceType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchType_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spBranchServiceType_Lookup.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

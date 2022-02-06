@@ -4,6 +4,7 @@ using RmbClone.Library.Models.Requests;
 using RmbClone.Library.Models.Responses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,8 @@ namespace RmbClone.Library.DataAccess
                 var location = await _locationData.FindByBranchIdAsync(branch.Id);
                 var city = await _cityData.FindAsync(branch.CityId);
                 var workingHours = await _sql.LoadDataAsync<WorkingHoursDBModel, dynamic>("dbo.spWorkingHours_LookupById", new { BranchId = branch.Id }, "RmbCloneDb");
-
+                var branchType = await _sql.LoadDataAsync<BranchTypeDBModel, dynamic>("dbo.spBranchType_LookupById", new { Id = branch.BranchTypeId }, "RmbCloneDb");
+                var branchServiceType = await _sql.LoadDataAsync<BranchServiceTypeDBModel, dynamic>("dbo.spBranchServiceType_LookupById", new { Id = branch.BranchServiceTypeId }, "RmbCloneDb");
                 var branchResponse = new BranchResponseModel
                 {
                     Id = branch.Id,
@@ -40,8 +42,8 @@ namespace RmbClone.Library.DataAccess
                     City = city,
                     Contact = branch.Contact,
                     WorkingHours = workingHours,
-                    BranchType = new BranchTypeDBModel(), //dobaviti prave vrijednosti
-                    BranchServiceType = new BranchServiceTypeDBModel(),//isto
+                    BranchType = branchType.FirstOrDefault(), 
+                    BranchServiceType = branchServiceType.FirstOrDefault(),
                     ATMType = branch.ATMType,
                     ATMFilter = branch.ATMFilter
                 };

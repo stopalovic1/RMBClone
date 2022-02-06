@@ -49,6 +49,9 @@ namespace RMBCloneAPI
             services.AddTransient<IHelperMethods, HelperMethods>();
             services.AddSingleton<IApiHelper, ApiHelper>();
             services.AddTransient<IRoleData, RoleData>();
+            services.AddTransient<IBranchTypeData, BranchTypeData>();
+            services.AddTransient<IBranchServiceTypeData, BranchServiceTypeData>();
+
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

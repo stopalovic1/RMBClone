@@ -8,6 +8,9 @@ namespace RmbClone.Library.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string IconPath { get; set; }
+        public BranchTypeDBModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
     }
 }
