@@ -114,6 +114,10 @@
     <Build Include="dbo\Stored Procedures\spBranchServiceType_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spBranchType_Lookup.sql" />
     <Build Include="dbo\Stored Procedures\spBranchServiceType_Lookup.sql" />
+    <Build Include="dbo\Tables\ATMFilter.sql" />
+    <Build Include="dbo\Stored Procedures\spAtmFilter_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spAtmFilter_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spAtmFilter_LookupById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

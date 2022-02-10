@@ -47,11 +47,12 @@ namespace RMBCloneAPI
             services.AddTransient<ICardData, CardData>();
             services.AddTransient<IBranchData, BranchData>();
             services.AddTransient<IHelperMethods, HelperMethods>();
-            services.AddSingleton<IApiHelper, ApiHelper>();
             services.AddTransient<IRoleData, RoleData>();
             services.AddTransient<IBranchTypeData, BranchTypeData>();
             services.AddTransient<IBranchServiceTypeData, BranchServiceTypeData>();
+            services.AddTransient<IATMFilterData, ATMFilterData>();
 
+            services.AddSingleton<IApiHelper, ApiHelper>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -150,6 +151,7 @@ namespace RMBCloneAPI
             app.UseSwaggerUI(x =>
             {
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                x.DefaultModelsExpandDepth(-1);
                 //x.RoutePrefix = String.Empty;
             });
 

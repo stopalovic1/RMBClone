@@ -13,7 +13,7 @@ namespace RmbClone.Library.Models
         public string BranchTypeId { get; set; }
         public string BranchServiceTypeId { get; set; }
         public string ATMType { get; set; }
-        public string ATMFilter { get; set; }
+        public string ATMFilterId { get; set; }
         public BranchDBModel()
         {
             Id = Guid.NewGuid().ToString();

@@ -15,6 +15,6 @@ namespace RmbClone.Library.Models.Responses
         public BranchTypeDBModel BranchType { get; set; }
         public BranchServiceTypeDBModel BranchServiceType { get; set; }
         public string ATMType { get; set; }
-        public string ATMFilter { get; set; }
+        public ATMFilterDBModel ATMFilter { get; set; }
     }
 }

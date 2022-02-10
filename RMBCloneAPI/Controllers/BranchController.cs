@@ -21,13 +21,21 @@ namespace RMBCloneAPI.Controllers
             _branchData = branchData;
         }
 
-        /// <response code="200">Vra</response> 
+        /// <response code="200">Vraca sve brancheve</response> 
         [HttpGet]
         [ProducesResponseType(200)]
         public async Task<ActionResult<List<BranchResponseModel>>> GetAll()
         {
-            var result = await _branchData.GetAllBranchesAsync();
-            return Ok(result);
+            try
+            {
+                var result = await _branchData.GetAllBranchesAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <response code="200">Poslovnica uspješno dodana.</response> 
@@ -50,8 +58,11 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city, [FromQuery] string? branchType, [FromQuery] string? branchServiceType)
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city="", [FromQuery] string? branchType="", [FromQuery] string? branchServiceType="")
         {
+            var a = city;
+
+
             var branches = await _branchData.GetAllBranchesAsync();
 
             var filteredBranches = branches;
