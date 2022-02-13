@@ -8,7 +8,7 @@ namespace RmbClone.Library.DataAccess
     {
         Task AddCityAsync(CityDBModel model);
         Task DeleteCityAsync(string id);
-        Task<CityDBModel> FindAsync(string id);
+        Task<CityDBModel> FindCityByIdAsync(string id);
         Task<List<CityDBModel>> GetAllCitiesAsync();
         Task UpdateCityAsync(CityDBModel model);
     }

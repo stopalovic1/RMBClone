@@ -28,7 +28,7 @@ namespace RmbClone.Library.DataAccess
             await _sql.SaveDataAsync("dbo.spCity_Insert", model, "RmbCloneDb");
         }
 
-        public async Task<CityDBModel> FindAsync(string id)
+        public async Task<CityDBModel> FindCityByIdAsync(string id)
         {
             var result = await _sql.LoadDataAsync<CityDBModel, dynamic>("dbo.spCity_LookupById", new { Id = id }, "RmbCloneDb");
             return result.FirstOrDefault();

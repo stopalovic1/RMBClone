@@ -26,9 +26,18 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(200)]
         public async Task<ActionResult<List<BranchResponseModel>>> GetAll()
         {
-            var result = await _branchData.GetAllBranchesAsync();
-            return Ok(result);
+            try
+            {
+                var result = await _branchData.GetAllBranchesAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+
 
         /// <response code="200">Poslovnica uspješno dodana.</response> 
         /// <response code="400">Body je neispravan.</response>
@@ -46,12 +55,63 @@ namespace RMBCloneAPI.Controllers
 
         }
 
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteBranch(string id)
+        {
+            var branch =await _branchData.GetBranchByIdAsync(id);
+            if (branch == null)
+            {
+                return BadRequest("Branch sa ovim id-om ne postoji.");
+            }
+            try
+            {
+                await _branchData.DeleteBranchAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateBranch(string id,BranchRequestModel model)
+        {
+            var branch = await _branchData.GetBranchByIdAsync(id);
+            if (branch == null)
+            {
+                return BadRequest("Branch sa ovim id-om ne postoji.");
+            }
+            try
+            {
+                await _branchData.UpdateBranchAsync(id, model);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city, [FromQuery] string? branchType, [FromQuery] string? branchServiceType)
-        {
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city = "", [FromQuery] string? branchType = "", [FromQuery] string? branchServiceType = "")
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city="", [FromQuery] string? branchType="", [FromQuery] string? branchServiceType="")
+
+            var a = city;
+
+
+            var a = city;
+
+
             var branches = await _branchData.GetAllBranchesAsync();
 
             var filteredBranches = branches;

@@ -10,7 +10,8 @@
     [ATMFilter] NVARCHAR(50) NOT NULL, 
     CONSTRAINT [FK_Branch_ToBranchType] FOREIGN KEY ([BranchTypeId]) REFERENCES [BranchType]([Id]), 
     CONSTRAINT [FK_Branch_ToBranchServiceType] FOREIGN KEY ([BranchServiceTypeId]) REFERENCES [BranchServiceType]([Id]), 
-    CONSTRAINT [FK_Branch_ToCity] FOREIGN KEY ([CityId]) REFERENCES [City]([Id]) 
+    CONSTRAINT [FK_Branch_ToCity] FOREIGN KEY ([CityId]) REFERENCES [City]([Id]),
+    CONSTRAINT [FK_Branch_ToATMFilter] FOREIGN KEY ([ATMFilterId]) REFERENCES [ATMFilter]([Id]) ON DELETE CASCADE
 
     
 

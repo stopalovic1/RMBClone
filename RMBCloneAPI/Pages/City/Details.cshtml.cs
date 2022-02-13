@@ -21,7 +21,7 @@ namespace RMBCloneAPI.Pages.City
 
         public async Task OnGet(string Id)
         {
-            var city = await _cityData.FindAsync(Id);
+            var city = await _cityData.FindCityByIdAsync(Id);
             City = city;
         }
     }
