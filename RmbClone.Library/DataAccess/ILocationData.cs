@@ -13,5 +13,6 @@ namespace RmbClone.Library.DataAccess
         Task<LocationDBModel> FindByBranchIdAsync(string branchId);
         Task<List<LocationDBModel>> GetAllLocationsAsync();
         Task UpdateLocationAsync(LocationDBModel model);
+        Task DeleteLocationByBranchIdAsync(string id);
     }
 }

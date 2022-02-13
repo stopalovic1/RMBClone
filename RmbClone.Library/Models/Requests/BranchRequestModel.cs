@@ -22,6 +22,6 @@ namespace RmbClone.Library.Models.Requests
         [Required]
         public string ATMType { get; set; }
         [Required]
-        public string ATMFilter { get; set; }
+        public string ATMFilterId { get; set; }
     }
 }

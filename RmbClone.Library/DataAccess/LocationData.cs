@@ -55,7 +55,5 @@ namespace RmbClone.Library.DataAccess
         {
             await _sql.SaveDataAsync("dbo.spLocation_DeleteByBranchId", new { BranchId = branchId }, "RmbCloneDb");
         }
-
-
     }
 }

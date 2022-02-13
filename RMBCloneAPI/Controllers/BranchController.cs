@@ -21,7 +21,7 @@ namespace RMBCloneAPI.Controllers
             _branchData = branchData;
         }
 
-        /// <response code="200">Vra</response> 
+        /// <response code="200">Vraca sve brancheve</response> 
         [HttpGet]
         [ProducesResponseType(200)]
         public async Task<ActionResult<List<BranchResponseModel>>> GetAll()
@@ -80,7 +80,7 @@ namespace RMBCloneAPI.Controllers
 
 
         [HttpPut("{id}")]
-        [ProducesResponseType(201)]
+        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> UpdateBranch(string id,BranchRequestModel model)
         {
@@ -103,14 +103,10 @@ namespace RMBCloneAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Route("FilterBranches")]
         public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city = "", [FromQuery] string? branchType = "", [FromQuery] string? branchServiceType = "")
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city="", [FromQuery] string? branchType="", [FromQuery] string? branchServiceType="")
-
-            var a = city;
-
-
-            var a = city;
-
+        {
 
             var branches = await _branchData.GetAllBranchesAsync();
 

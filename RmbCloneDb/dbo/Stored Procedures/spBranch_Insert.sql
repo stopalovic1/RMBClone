@@ -6,10 +6,10 @@
 	@BranchTypeId nvarchar(128),
 	@BranchServiceTypeId nvarchar(128),
 	@ATMType nvarchar(50),
-	@ATMFilter nvarchar(50)
+	@ATMFilterId nvarchar(128)
 AS
 begin
 	set nocount on;
-	insert into [dbo].[Branch](Id,[Name],CityId,Contact,BranchTypeId,BranchServiceTypeId,ATMType,ATMFilter)
-	values(@Id,@Name,@CityId,@Contact,@BranchTypeId,@BranchServiceTypeId,@ATMType,@ATMFilter);
+	insert into [dbo].[Branch](Id,[Name],CityId,Contact,BranchTypeId,BranchServiceTypeId,ATMType,ATMFilterId)
+	values(@Id,@Name,@CityId,@Contact,@BranchTypeId,@BranchServiceTypeId,@ATMType,@ATMFilterId);
 end
