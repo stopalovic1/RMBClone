@@ -33,7 +33,6 @@ namespace RMBCloneAPI.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
@@ -54,14 +53,58 @@ namespace RMBCloneAPI.Controllers
 
         }
 
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteBranch(string id)
+        {
+            var branch =await _branchData.GetBranchByIdAsync(id);
+            if (branch == null)
+            {
+                return BadRequest("Branch sa ovim id-om ne postoji.");
+            }
+            try
+            {
+                await _branchData.DeleteBranchAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateBranch(string id,BranchRequestModel model)
+        {
+            var branch = await _branchData.GetBranchByIdAsync(id);
+            if (branch == null)
+            {
+                return BadRequest("Branch sa ovim id-om ne postoji.");
+            }
+            try
+            {
+                await _branchData.UpdateBranchAsync(id, model);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city="", [FromQuery] string? branchType="", [FromQuery] string? branchServiceType="")
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city = "", [FromQuery] string? branchType = "", [FromQuery] string? branchServiceType = "")
         {
-            var a = city;
-
 
             var branches = await _branchData.GetAllBranchesAsync();
 

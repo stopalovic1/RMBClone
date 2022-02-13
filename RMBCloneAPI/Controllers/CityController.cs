@@ -40,7 +40,7 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<CityDBModel>> GetById(string id)
         {
-            var result = await _cityData.FindAsync(id);
+            var result = await _cityData.FindCityByIdAsync(id);
             if (result == null)
             {
                 return BadRequest();
@@ -77,7 +77,7 @@ namespace RMBCloneAPI.Controllers
                 {
                     return BadRequest();
                 }
-                var city = await _cityData.FindAsync(id);
+                var city = await _cityData.FindCityByIdAsync(id);
                 if (city == null)
                 {
                     return BadRequest();
@@ -97,7 +97,7 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteCity(string id)
         {
-            var city = await _cityData.FindAsync(id);
+            var city = await _cityData.FindCityByIdAsync(id);
             if (city == null)
             {
                 return BadRequest();
@@ -108,7 +108,6 @@ namespace RMBCloneAPI.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
             

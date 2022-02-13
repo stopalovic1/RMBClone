@@ -118,6 +118,12 @@
     <Build Include="dbo\Stored Procedures\spAtmFilter_Lookup.sql" />
     <Build Include="dbo\Stored Procedures\spAtmFilter_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spAtmFilter_LookupById.sql" />
+    <Build Include="dbo\Stored Procedures\spLocation_DeleteByBranchId.sql" />
+    <Build Include="dbo\Stored Procedures\spWorkingHours_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_LookupById.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spWorkingHours_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

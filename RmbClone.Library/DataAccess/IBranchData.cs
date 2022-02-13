@@ -10,5 +10,8 @@ namespace RmbClone.Library.DataAccess
     {
         Task<List<BranchResponseModel>> GetAllBranchesAsync();
         Task InsertBranchAsync(BranchRequestModel model);
+        Task<BranchDBModel> GetBranchByIdAsync(string id);
+        Task DeleteBranchAsync(string id);
+        Task UpdateBranchAsync(string id, BranchRequestModel model);
     }
 }
