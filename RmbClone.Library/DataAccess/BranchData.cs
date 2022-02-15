@@ -29,9 +29,10 @@ namespace RmbClone.Library.DataAccess
             _atmFilterData = atmFilterData;
         }
 
-        public async Task<List<BranchResponseModel>> GetAllBranchesAsync()
+        public async Task<List<BranchResponseModel>> GetAllBranchesAsync(List<BranchDBModel> brs = null)
         {
-            var branches = await _sql.LoadDataAsync<BranchDBModel, dynamic>("dbo.spBranch_Lookup", new { }, "RmbCloneDb");
+
+            var branches = brs ?? await _sql.LoadDataAsync<BranchDBModel, dynamic>("dbo.spBranch_Lookup", new { }, "RmbCloneDb");
             var result = new List<BranchResponseModel>();
             foreach (var branch in branches)
             {
@@ -155,6 +156,22 @@ namespace RmbClone.Library.DataAccess
 
             await _sql.SaveDataAsync("dbo.spBranch_Update", branch, "RmbCloneDb");
         }
+
+        public async Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null)
+        {
+            var parameters = new
+            {
+                City = city,
+                BranchType = branchType,
+                BranchServiceType = branchServiceType
+            };
+
+            var result = await _sql.LoadDataAsync<BranchDBModel, dynamic>("dbo.spBranch_Filter", parameters, "RmbCLoneDb");
+            var mappedResults = await GetAllBranchesAsync(result);
+
+            return mappedResults;
+        }
+
 
     }
 }

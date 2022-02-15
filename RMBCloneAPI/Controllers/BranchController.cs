@@ -61,7 +61,7 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteBranch(string id)
         {
-            var branch =await _branchData.GetBranchByIdAsync(id);
+            var branch = await _branchData.GetBranchByIdAsync(id);
             if (branch == null)
             {
                 return BadRequest("Branch sa ovim id-om ne postoji.");
@@ -82,7 +82,7 @@ namespace RMBCloneAPI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> UpdateBranch(string id,BranchRequestModel model)
+        public async Task<IActionResult> UpdateBranch(string id, BranchRequestModel model)
         {
             var branch = await _branchData.GetBranchByIdAsync(id);
             if (branch == null)
@@ -94,7 +94,7 @@ namespace RMBCloneAPI.Controllers
                 await _branchData.UpdateBranchAsync(id, model);
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -105,29 +105,17 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string? city = "", [FromQuery] string? branchType = "", [FromQuery] string? branchServiceType = "")
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string city = null, [FromQuery] string branchType = null, [FromQuery] string branchServiceType = null)
         {
-
-            var branches = await _branchData.GetAllBranchesAsync();
-
-            var filteredBranches = branches;
-            if (city != null)
+            try
             {
-                filteredBranches = branches.Where(x => x.City.Name == city).ToList();
+                var result = await _branchData.GetFilteredBranchesAsync(city, branchType, branchServiceType);
+                return Ok(result);
             }
-
-            if (branchType != null)
+            catch (Exception ex)
             {
-                filteredBranches = filteredBranches.Where(x => x.BranchType.Name == branchType).ToList();
+                return BadRequest(ex.Message);
             }
-
-            if (branchServiceType != null)
-            {
-                filteredBranches = filteredBranches.Where(x => x.BranchServiceType.Name == branchServiceType).ToList();
-            }
-
-            return Ok(filteredBranches);
-
         }
 
     }

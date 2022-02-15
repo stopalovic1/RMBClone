@@ -124,6 +124,7 @@
     <Build Include="dbo\Stored Procedures\spBranch_LookupById.sql" />
     <Build Include="dbo\Stored Procedures\spBranch_Update.sql" />
     <Build Include="dbo\Stored Procedures\spWorkingHours_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spBranch_Filter.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />
