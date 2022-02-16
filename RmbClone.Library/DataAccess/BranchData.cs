@@ -66,9 +66,6 @@ namespace RmbClone.Library.DataAccess
             return result.FirstOrDefault();
         }
 
-
-
-
         public async Task InsertBranchAsync(BranchRequestModel model)
         {
 

@@ -139,7 +139,7 @@ namespace RMBCloneAPI
                 }
                 await next();
             });
-
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseStatusCodePages();
             app.UseRouting();
