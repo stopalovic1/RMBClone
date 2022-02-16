@@ -119,6 +119,7 @@ namespace RMBCloneAPI
                 new CultureInfo("ba")
             };
 
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseStaticFiles();
             app.UseRequestLocalization(options =>
             {
@@ -139,7 +140,7 @@ namespace RMBCloneAPI
                 }
                 await next();
             });
-            app.UseCors();
+            
             app.UseHttpsRedirection();
             app.UseStatusCodePages();
             app.UseRouting();

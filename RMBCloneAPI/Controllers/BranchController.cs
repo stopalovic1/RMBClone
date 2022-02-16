@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RmbClone.Library.DataAccess;
 using RmbClone.Library.Models.Requests;
 using RmbClone.Library.Models.Responses;
+using RMBCloneAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,11 +106,12 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string city = null, [FromQuery] string branchType = null, [FromQuery] string branchServiceType = null)
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string city = null, [FromQuery] string branchType = null, 
+            [FromQuery] string branchServiceType = null, [FromQuery] string atmType = null, double? radius = null,double? latitude=null,double? longitude=null)
         {
             try
             {
-                var result = await _branchData.GetFilteredBranchesAsync(city, branchType, branchServiceType);
+                var result = await _branchData.GetFilteredBranchesAsync(city, branchType, branchServiceType, atmType, radius, latitude,longitude);
                 return Ok(result);
             }
             catch (Exception ex)

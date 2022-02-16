@@ -61,6 +61,7 @@
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Views" />
     <Folder Include="dbo\PublishLocations" />
+    <Folder Include="dbo\Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\FrequentlyAskedQuestions.sql" />
@@ -125,6 +126,7 @@
     <Build Include="dbo\Stored Procedures\spBranch_Update.sql" />
     <Build Include="dbo\Stored Procedures\spWorkingHours_Update.sql" />
     <Build Include="dbo\Stored Procedures\spBranch_Filter.sql" />
+    <Build Include="dbo\Functions\convertLatAndLongToKM.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

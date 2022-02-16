@@ -11,7 +11,7 @@ namespace RmbClone.Library.DataAccess
         Task DeleteBranchAsync(string id);
         Task<List<BranchResponseModel>> GetAllBranchesAsync(List<BranchDBModel> brs=null);
         Task<BranchDBModel> GetBranchByIdAsync(string id);
-        Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null);
+        Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null, string atmType = null, double? radius = null, double? latitude = null, double? longitude = null);
         Task InsertBranchAsync(BranchRequestModel model);
         Task UpdateBranchAsync(string id, BranchRequestModel model);
     }

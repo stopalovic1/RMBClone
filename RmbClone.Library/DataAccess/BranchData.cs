@@ -154,13 +154,17 @@ namespace RmbClone.Library.DataAccess
             await _sql.SaveDataAsync("dbo.spBranch_Update", branch, "RmbCloneDb");
         }
 
-        public async Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null)
+        public async Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null, string atmType = null, double? radius = null, double? latitude = null, double? longitude = null)
         {
             var parameters = new
             {
                 City = city,
                 BranchType = branchType,
-                BranchServiceType = branchServiceType
+                BranchServiceType = branchServiceType,
+                ATMType = atmType,
+                Radius = radius,
+                Latitude = latitude,
+                Longitude = longitude
             };
 
             var result = await _sql.LoadDataAsync<BranchDBModel, dynamic>("dbo.spBranch_Filter", parameters, "RmbCLoneDb");
