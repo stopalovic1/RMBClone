@@ -106,12 +106,12 @@ namespace RMBCloneAPI.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("FilterBranches")]
-        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string city = null, [FromQuery] string branchType = null, 
-            [FromQuery] string branchServiceType = null, [FromQuery] string atmType = null, double? radius = null,double? latitude=null,double? longitude=null)
+        public async Task<ActionResult<List<BranchResponseModel>>> FilterBranches([FromQuery] string cityId = null, [FromQuery] string branchTypeId = null,
+            [FromQuery] string branchServiceTypeId = null, [FromQuery] string atmType = null, double? radius = null, double? latitude = null, double? longitude = null)
         {
             try
             {
-                var result = await _branchData.GetFilteredBranchesAsync(city, branchType, branchServiceType, atmType, radius, latitude,longitude);
+                var result = await _branchData.GetFilteredBranchesAsync(cityId, branchTypeId, branchServiceTypeId, atmType, radius, latitude, longitude);
                 return Ok(result);
             }
             catch (Exception ex)

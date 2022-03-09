@@ -127,6 +127,13 @@
     <Build Include="dbo\Stored Procedures\spWorkingHours_Update.sql" />
     <Build Include="dbo\Stored Procedures\spBranch_Filter.sql" />
     <Build Include="dbo\Functions\convertLatAndLongToKM.sql" />
+    <Build Include="dbo\Tables\Transaction.sql" />
+    <Build Include="dbo\Stored Procedures\spCard_LookupByUserId.sql" />
+    <Build Include="dbo\Stored Procedures\spTransaction_LookupByCardId.sql" />
+    <Build Include="dbo\Stored Procedures\spTransaction_LookupBySender.sql" />
+    <Build Include="dbo\Stored Procedures\spTransaction_LookupByReceiver.sql" />
+    <Build Include="dbo\Stored Procedures\spCard_LookupByTransactionNumber.sql" />
+    <Build Include="dbo\Stored Procedures\spTransaction_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PublishLocations\RmbCloneDb.publish.xml" />

@@ -1,33 +1,31 @@
-﻿using System;
+﻿using RmbClone.Library.Models.HelperModels;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace RmbClone.Library.Models
+namespace RmbClone.Library.Models.Responses
 {
-    public class CardDBModel
+    public class CardResponseModel
     {
+
         public string Id { get; set; }
-        [Required]
-        public string UserId { get; set; }
-        [Required]
+
         public string Iban { get; set; }
-        [Required]
+
         public string CardNumber { get; set; }
-        [Required]
+
         public DateTime ValidUntil { get; set; }
-        [Required]
+
         public string TransactionNumber { get; set; }
-        [Required]
+
         public double CurrentAmount { get; set; }
-        [Required]
+
         public bool HasLimit { get; set; }
 
         public double? LimitAmount { get; set; }
 
-        public CardDBModel()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        public List<SentTransactionsModel> SentTransactions { get; set; }
+        public List<ReceivedTransactionsModel> ReceivedTransactions { get; set; }
+
     }
 }

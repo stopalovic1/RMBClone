@@ -91,4 +91,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="fe9b5718-55dc-4b4d-b61a-fd734950350f" ChangeDateTime="03/08/2022 14:25:48">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[RecieverCard]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReceieverCard" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="47f36fc2-2e38-4ac8-9634-630cbdb5b917" ChangeDateTime="03/08/2022 14:25:58">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[ReceieverCard]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReceiverCard" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7356c85d-6c69-4063-b285-3158412d3cbb" ChangeDateTime="03/08/2022 14:27:48">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[ReceiverCard]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReceiverCardId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b2e7267d-d81c-469a-b085-949784cf37bf" ChangeDateTime="03/09/2022 10:53:02">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[From]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FromAccount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fd06e526-96cb-4ae7-9256-6190f369f7a6" ChangeDateTime="03/09/2022 10:53:16">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[To]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ToAccount" />
+  </Operation>
 </Operations>

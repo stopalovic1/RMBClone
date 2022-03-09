@@ -31,10 +31,10 @@ namespace RmbClone.Library.DataAccess
 
         public async Task<List<BranchResponseModel>> GetAllBranchesAsync(List<BranchDBModel> brs = null)
         {
-
             var branches = brs ?? await _sql.LoadDataAsync<BranchDBModel, dynamic>("dbo.spBranch_Lookup", new { }, "RmbCloneDb");
             var result = new List<BranchResponseModel>();
-            foreach (var branch in branches)
+
+            var tasks = branches.Select(async branch =>
             {
                 var location = await _locationData.FindByBranchIdAsync(branch.Id);
                 var city = await _cityData.FindCityByIdAsync(branch.CityId);
@@ -56,7 +56,34 @@ namespace RmbClone.Library.DataAccess
                     ATMFilter = atmFilter
                 };
                 result.Add(branchResponse);
-            }
+            });
+            await Task.WhenAll(tasks);
+
+
+            //foreach (var branch in branches)
+            //{
+            //    var location = await _locationData.FindByBranchIdAsync(branch.Id);
+            //    var city = await _cityData.FindCityByIdAsync(branch.CityId);
+            //    var workingHours = await _sql.LoadDataAsync<WorkingHoursDBModel, dynamic>("dbo.spWorkingHours_LookupById", new { BranchId = branch.Id }, "RmbCloneDb");
+            //    var branchType = await _branchTypeData.GetBranchTypeByIdAsync(branch.BranchTypeId);
+            //    var branchServiceType = await _branchServiceTypeData.GetBranchServiceTypeByIdAsync(branch.BranchServiceTypeId);
+            //    var atmFilter = await _atmFilterData.GetAtmFilterByIdAsync(branch.ATMFilterId);
+            //    var branchResponse = new BranchResponseModel
+            //    {
+            //        Id = branch.Id,
+            //        Location = location,
+            //        Name = branch.Name,
+            //        City = city,
+            //        Contact = branch.Contact,
+            //        WorkingHours = workingHours,
+            //        BranchType = branchType,
+            //        BranchServiceType = branchServiceType,
+            //        ATMType = branch.ATMType,
+            //        ATMFilter = atmFilter
+            //    };
+            //    result.Add(branchResponse);
+            //}
+
             return result;
         }
 
@@ -154,13 +181,13 @@ namespace RmbClone.Library.DataAccess
             await _sql.SaveDataAsync("dbo.spBranch_Update", branch, "RmbCloneDb");
         }
 
-        public async Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string city = null, string branchType = null, string branchServiceType = null, string atmType = null, double? radius = null, double? latitude = null, double? longitude = null)
+        public async Task<List<BranchResponseModel>> GetFilteredBranchesAsync(string cityId = null, string branchTypeId = null, string branchServiceTypeId = null, string atmType = null, double? radius = null, double? latitude = null, double? longitude = null)
         {
             var parameters = new
             {
-                City = city,
-                BranchType = branchType,
-                BranchServiceType = branchServiceType,
+                CityId = cityId,
+                BranchTypeId = branchTypeId,
+                BranchServiceTypeId = branchServiceTypeId,
                 ATMType = atmType,
                 Radius = radius,
                 Latitude = latitude,

@@ -38,7 +38,7 @@ namespace RMBCloneAPI
         {
             services.AddControllers();
             services.AddMvc();
-            
+
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IFaqData, FaqData>();
             services.AddTransient<IUserData, UserData>();
@@ -51,7 +51,7 @@ namespace RMBCloneAPI
             services.AddTransient<IBranchTypeData, BranchTypeData>();
             services.AddTransient<IBranchServiceTypeData, BranchServiceTypeData>();
             services.AddTransient<IATMFilterData, ATMFilterData>();
-
+            services.AddTransient<ITransactionData, TransactionData>();
             services.AddSingleton<IApiHelper, ApiHelper>();
 
             services.Configure<ApiBehaviorOptions>(options =>
@@ -106,8 +106,8 @@ namespace RMBCloneAPI
         {
             if (env.IsDevelopment())
             {
-                
-               //app.UseStatusCodePagesWithReExecute("/Errors/{0}");
+
+                //app.UseStatusCodePagesWithReExecute("/Errors/{0}");
             }
             else
             {
@@ -140,7 +140,7 @@ namespace RMBCloneAPI
                 }
                 await next();
             });
-            
+
             app.UseHttpsRedirection();
             app.UseStatusCodePages();
             app.UseRouting();

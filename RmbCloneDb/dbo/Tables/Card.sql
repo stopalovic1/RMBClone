@@ -6,5 +6,8 @@
     [CardNumber] NVARCHAR(128) NOT NULL, 
     [ValidUntil] DATETIME2 NOT NULL, 
     [TransactionNumber] NVARCHAR(128) NOT NULL, 
+    [CurrentAmount] MONEY NULL, 
+    [HasLimit] BIT NULL, 
+    [LimitAmount] MONEY NULL, 
     CONSTRAINT [FK_Card_ToUser] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]) 
 )

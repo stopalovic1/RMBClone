@@ -25,22 +25,31 @@ namespace RMBCloneAPI.Controllers
             _userData = userData;
             _config = config;
         }
-        [HttpGet]
-        public async Task<ActionResult<List<CardDBModel>>> GetAll()
-        {
-            var result = await _cardData.GetAllCardsAsync();
-            return Ok(result);
-        }
+
+        //[HttpGet]
+        //public async Task<ActionResult<List<CardDBModel>>> GetAll()
+        //{
+        //    var result = await _cardData.GetAllCardsForUserAsync();
+        //    return Ok(result);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CardDBModel>> GetById(string id)
         {
-            var result = await _cardData.FindAsync(id);
-            if (result == null)
+            try
             {
-                return BadRequest();
+                var result = await _cardData.GetAllCardsForUserAsync(id);
+                if (result == null)
+                {
+                    return BadRequest();
+                }
+                return Ok(result);
             }
-            return Ok(result);
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPost]
         public async Task<IActionResult> AddCard(CardRequestModel model)
